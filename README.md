@@ -19,11 +19,11 @@ R codes for the analyses and the generation of the results shown in manuscript (
 - Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes. 
 [submitted (2017)]
 
-- Ishwaran, H. and Kogalur, U.B. Contributed R Package Random Forests for Survival, Regression and Classification (RF-SRC).
+- Ishwaran, H. and Kogalur, U.B. Contributed R Package `randomForestSRC`: Random Forests for Survival, Regression and Classification (RF-SRC).
 [CRAN (2013)](https://CRAN.R-project.org/package=randomForestSRC)
 
 - Ishwaran H. and Kogalur U.B. Random Survival Forests for R. 
 [R News, 7(2), 25-31, (2007)](https://pdfs.semanticscholar.org/951a/84f0176076fb6786fdf43320e8b27094dcfa.pdf)
 
-- Ehrlinger J. Contributed R Package ggRandomForests: Visually Exploring Random Forests
+- Ehrlinger J. Contributed R Package `ggRandomForests`: Visually Exploring Random Forests
 [CRAN (2014)](https://CRAN.R-project.org/package=ggRandomForests)
