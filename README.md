@@ -24,7 +24,6 @@ Random Survival Forest; Interaction Detection and Modeling; Time-to-Event Analys
 
 ==============
 ### Real Dataset
-Background
 For our objectives, we utilized samples from the previously published MACS cohort study (http://www.statepi.jhsph.edu/macs/macs.html), which provides longitudinal account of viral tropism in relation to the HIV full spectrum of rates of HIV-1 disease progression (Shepherd, et al. 2008). To our knowledge, this cohort provides a unique dataset with well characterized clinical information for analyzing associations between host genetic variation and viral tropism as well as disease progression. Here, we determined whether copy number variation in -defensin and its interactions with certain polymorphisms in chemokine receptors and ligand genes are associated, either alone or jointly, with clinical events in HIV-seropositive patients, such as time to HIV change of tropism or time to AIDS diagnosis. Additional descriptions of the dataset and materials used are provided in the Supplemental Materials.
 
 
@@ -41,6 +40,8 @@ For our objectives, we utilized samples from the previously published MACS cohor
 
 - Ehrlinger J. Contributed R Package `ggRandomForests`: Visually Exploring Random Forests
 [CRAN (2014)](https://CRAN.R-project.org/package=ggRandomForests)
+
+- Shepherd, J. C., et al. Emergence and Persistence of Cxcr4-Tropic Hiv-1 in a Population of Men from the Multicenter Aids Cohort Study. [J Infect Dis, 198, 1104-1112 (2008)](https://www.ncbi.nlm.nih.gov/pubmed/18783316).
 
 
 ==============
