@@ -26,6 +26,7 @@ Random Survival Forest; Interaction Detection and Modeling; Time-to-Event Analys
 ### Real Dataset
 For our objectives, we utilized samples from the previously published MACS cohort study (http://www.statepi.jhsph.edu/macs/macs.html), which provides longitudinal account of viral tropism in relation to the HIV full spectrum of rates of HIV-1 disease progression (Shepherd, et al. 2008). To our knowledge, this cohort provides a unique dataset with well characterized clinical information for analyzing associations between host genetic variation and viral tropism as well as disease progression. Here, we determined whether copy number variation in -defensin and its interactions with certain polymorphisms in chemokine receptors and ligand genes are associated, either alone or jointly, with clinical events in HIV-seropositive patients, such as time to HIV change of tropism or time to AIDS diagnosis. Additional descriptions of the dataset and materials used are provided in the Supplemental Materials.
 
+The variables included in the MACS cohort study were 5 genetic variants (DEFB4/103A CNV [1-5], CCR2 SNP [190G>A], CCR5 [SNP -2459G>A, ORF], CXCL12 SNP [801G>A] and two non-genetic variables, taken as two additional covariates. All variables were categorical with no more than three levels (experimental groups) each. We used genetic variables with original and aggregated categories as follows: DEFB CNV [CNV = 2 or CNV > 2]; CCR2 SNP [GG or GA], CCR5 SNP [GG or GA]; CCR5 ORF [WT or 32], CXCL12 SNP [GG or GA].
 
 ==============
 ### References
