@@ -15,6 +15,20 @@ sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy
 R codes for the analyses and the generation of the results shown in manuscript (Dazard et al., 2017). Codes contain randomization, interaction modeling and prediction subroutines to be used in addition to the following R packages (http://cran.r-project.org/): [`survival`](https://CRAN.R-project.org/package=survival) for Kaplan-Meier and Cox regression modeling, [`NADA`](https://CRAN.R-project.org/package=NADA) for correlation analysis in the presence of censoring, [`randomForestSRC`](https://CRAN.R-project.org/package=randomForestSRC) for RSF modeling (Ishwaran and Kogalur, 2013, 2007), and [`ggRandomForests`](https://CRAN.R-project.org/package=ggRandomForests) (Ehrlinger, 2014) for Random Forrest exploration/visualization. Default parameter specifications were used for all main functions.
 
 ==============
+### Abstract
+Unraveling interactions among variables such as genetic, clinical, demographic and environmental factors is essential to understand the development of common and complex diseases. To increase the power to detect such variables interactions associated with clinical time-to-events outcomes, we borrowed established concepts from Random Survival Forest (RSF) models. We introduce a novel RSF-based pairwise interaction estimator and derive a randomization method with bootstrap confidence intervals for inferring interaction significance. Using various linear and non-linear time-to-events survival models in simulation studies, we first show the efficiency of our approach: true pairwise interaction-effects between variables are thus uncovered, while they may not be accompanied with their corresponding main-effects and often not detected by standard semi-parametric Cox regression. Moreover, using a RSF-based cross-validation scheme for generating prediction estimators, we show that informative predictors may thus be inferred. We illustrate the application of our approach in an HIV cohort study recording key host gene polymorphisms and their association with HIV change of tropism or AIDS progression. Altogether, this shows how linear or non-linear pairwise statistical interactions between variables may be uncovered in clinical studies with time-to-event outcomes of interest when the motivation is to discover important variables interactions with a predictive clinical value.
+
+Key words (5)
+Random Survival Forest; Interaction Detection and Modeling; Time-to-Event Analysis; Epistasis; Genetic Variations Interactions.
+
+
+==============
+### Real Dataset
+Background
+For our objectives, we utilized samples from the previously published MACS cohort study (http://www.statepi.jhsph.edu/macs/macs.html), which provides longitudinal account of viral tropism in relation to the HIV full spectrum of rates of HIV-1 disease progression (Shepherd, et al. 2008). To our knowledge, this cohort provides a unique dataset with well characterized clinical information for analyzing associations between host genetic variation and viral tropism as well as disease progression. Here, we determined whether copy number variation in -defensin and its interactions with certain polymorphisms in chemokine receptors and ligand genes are associated, either alone or jointly, with clinical events in HIV-seropositive patients, such as time to HIV change of tropism or time to AIDS diagnosis. Additional descriptions of the dataset and materials used are provided in the Supplemental Materials.
+
+
+==============
 ### References
 - Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes. 
 [submitted (2017)]
@@ -27,3 +41,8 @@ R codes for the analyses and the generation of the results shown in manuscript (
 
 - Ehrlinger J. Contributed R Package `ggRandomForests`: Visually Exploring Random Forests
 [CRAN (2014)](https://CRAN.R-project.org/package=ggRandomForests)
+
+
+==============
+### Acknowledgments
+This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University. We are thankful to Ms. Janet Schollenberger, Senior Project Coordinator, CAMACS, as well as Dr. Jeremy J. Martinson, Sudhir Penugonda, Shehnaz K. Hussain, Jay H. Bream, and Priya Duggal, for providing us the data related to the samples analyzed in the present study. Data in this manuscript were collected by the Multicenter AIDS Cohort Study (MACS) at (http://www.statepi.jhsph.edu/macs/macs.html) with centers at Baltimore, Chicago, Los Angeles, Pittsburgh, and the Data Coordinating Center: The Johns Hopkins University Bloomberg School of Public Health. The MACS is funded primarily by the National Institute of Allergy and Infectious Diseases (NIAID), with additional co-funding from the National Cancer Institute (NCI), the National Heart, Lung, and Blood Institute (NHLBI), and the National Institute on Deafness and Communication Disorders (NIDCD). MACS data collection is also supported by Johns Hopkins University CTSA. This study was supported by two grants from the National Institute of Health: NIDCR P01DE019759 (Aaron Weinberg, Peter Zimmerman, Richard J. Jurevic, Mark Chance) and NCI R01CA163739 (Hemant Ishwaran). The work was also partly supported by the National Science Foundation grant DMS 1148991 (Hemant Ishwaran) and the Center for AIDS Research grant P30AI036219 (Mark Chance). The contents of this publication are solely the responsibility of the authors and do not represent the official views of the granting agencies and institutions. The funders had also no role in the study design, data collection and analysis, decision to publish, or preparation of the manuscript.
