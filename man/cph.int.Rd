@@ -1,89 +1,133 @@
 \name{cph.int}
+
 \alias{cph.int}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
-\usage{
-cph.int(X, int.term)
-}
-%- maybe also 'usage' for other objects documented here.
-\arguments{
-  \item{X}{
-%%     ~~Describe \code{X} here~~
-}
-  \item{int.term}{
-%%     ~~Describe \code{int.term} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+    Pairwise interaction effects in a Cox-PH model
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\description{
+    Fits a Proportional Hazards Time-To-Event Regression Model saturated with first and second order terms.
+    Computes p-values of significance of regression coefficients of pairwise interaction effects in a Cox-PH model.
+}
+
+\usage{
+    cph.int(X,
+            int.term)
+}
+
+\arguments{
+    \item{X}{
+        \code{data.frame} or \code{numeric} \code{matrix} of input covariates.
+         Dataset \code{X} assumes that:
+         - all variables are in columns
+         - the observed times to event and censoring variables are in the first two columns:
+           \code{"stime"}: \code{numeric} \code{vector} of observed times.
+           \code{"status"}: \code{numeric} \code{vector} of observed status (censoring) indicator variable.
+         - each variable has a unique name, excluding the word "noise"
+   }
+    \item{int.term}{
+    \code{vector} of \code{character} string of all possible pairs of covariates names, separated by ":".
+    }
+}
+
+\details{
+    None
+}
+
+\value{
+    \code{list} of 2 fields:
+    \item{raw}{Raw p-value of covariates pairwise interaction statistics significance}
+    \item{fdr}{FDR-adjusted p-value of covariates pairwise interaction statistics significance}
+}
+
+\author{
+    \packageAuthor{IRSF}
+    Maintainer: \packageMaintainer{IRSF}
+}
+
+\references{
+    \itemize{
+        \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A.
+              "\emph{Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes}"
+              Submitted (2017).
+        \item Ishwaran, H. and Kogalur, U.B.
+              "\emph{Random Survival Forests for R}.
+              R News, 7(2), 25-31, (2007).
+        \item Ishwaran, H. and Kogalur, U.B.
+              "\emph{Contributed R Package \code{\link[randomForestSRC:randomForestSRC-package]{randomForestSRC}}: Random Forests for Survival, Regression and Classification (RF-SRC)}"
+              CRAN (2013).
+    }
+}
+
+\section{Acknowledgments}{
+    This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University.
+    We are thankful to Ms. Janet Schollenberger, Senior Project Coordinator, CAMACS, as well as Dr. Jeremy J. Martinson, Sudhir Penugonda, Shehnaz K. Hussain, Jay H. Bream,
+    and Priya Duggal, for providing us the data related to the samples analyzed in the present study. Data in this manuscript were collected by the Multicenter AIDS Cohort Study (MACS)
+    at (http://www.statepi.jhsph.edu/macs/macs.html) with centers at Baltimore, Chicago, Los Angeles, Pittsburgh, and the Data Coordinating Center: The Johns Hopkins University Bloomberg School of Public Health.
+    The MACS is funded primarily by the National Institute of Allergy and Infectious Diseases (NIAID), with additional co-funding from the National Cancer Institute (NCI),
+    the National Heart, Lung, and Blood Institute (NHLBI), and the National Institute on Deafness and Communication Disorders (NIDCD). MACS data collection is also supported by Johns Hopkins University CTSA.
+    This study was supported by two grants from the National Institute of Health: NIDCR P01DE019759 (Aaron Weinberg, Peter Zimmerman, Richard J. Jurevic, Mark Chance) and NCI R01CA163739 (Hemant Ishwaran).
+    The work was also partly supported by the National Science Foundation grant DMS 1148991 (Hemant Ishwaran) and the Center for AIDS Research grant P30AI036219 (Mark Chance).
+}
+
+\keyword{Random Survival Forest}
+\keyword{Interaction Detection and Modeling}
+\keyword{Time-to-Event Analysis}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+    \code{\link[randomForestSRC:randomForestSRC-package]{randomForestSRC}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (X, int.term) 
-{
-    p <- dim(X)[2] - 2
-    int.term.list <- strsplit(x = int.term, split = ":")
-    fmla.int <- as.formula(paste("Surv(time=", colnames(X)[1], 
-        ", event=", colnames(X)[2], ", type=\"right\") ~ . + (.)^2", 
-        sep = ""))
-    P.cph.int <- numeric(p * (p - 1)/2)
-    names(P.cph.int) <- int.term
-    for (j in 1:(p * (p - 1)/2)) {
-        Z <- X[, c(colnames(X)[1], colnames(X)[2], int.term.list[[j]])]
-        coxfit <- tryCatch({
-            coxph(fmla.int, data = Z, model = T, x = T, y = T)
-        }, error = function(w) {
-            NULL
-        }, warning = function(w) {
-            NULL
-        })
-        if (is.null(coxfit)) {
-            P.cph.int[j] <- NA
-        }
-        else {
-            P.cph.int[j] <- summary(coxfit)$coefficients[3, "Pr(>|z|)", 
-                drop = T]
-        }
-    }
-    P.cph.bh.int <- P.cph.int
-    nna <- !is.na(P.cph.int)
-    P.cph.bh.int[nna] <- p.adjust(p = P.cph.int[nna], method = "BH")
-    P.cph.bh.int[!nna] <- NA
-    return(list(raw = P.cph.int, fdr = P.cph.bh.int))
-  }
+\examples{
+   \dontrun{
+   #===================================================
+   # Loading the library and its dependencies
+   #===================================================
+   library("IRSF")
+
+   #==========================================================================================#
+   # Continuous case:
+   # All variables xj, j in {1,...,p}, are iid from a multivariate uniform distribution
+   # with parmeters  a=1, b=5, i.e. on [1, 5].
+   # rho = 0.50
+   # Regression model: X1 + X2 + X1X2
+   #==========================================================================================#
+   seed <- 1234567
+   set.seed(seed)
+   n <- 200
+   p <- 5
+   x <- matrix(data=runif(n=n*p, min=1, max=5),
+               nrow=n, ncol=p, byrow=FALSE,
+               dimnames=list(1:n, paste("X", 1:p, sep="")))
+
+   beta <- c(rep(1,2), rep(0,p-2), 1)
+   covar <- cbind(x, "X1X2"=x[,1]*x[,2])
+   eta <- covar %*% beta                     # regression function
+
+   seed <- 1234567
+   set.seed(seed)
+   lambda0 <- 1
+   lambda <- lambda0 * exp(eta - mean(eta))  # hazards function
+   tt <- rexp(n=n, rate=lambda)              # true (uncensored) event times
+   tc <- runif(n=n, min=0, max=3.9)          # true (censored) event times
+   stime <- pmin(tt, tc)                     # observed event times
+   status <- 1 * (tt <= tc)                  # observed event indicator
+   X <- data.frame(stime, status, x)
+
+   int.mdms <- rsf.int(X=X, 
+                       ntree=1000, 
+                       method="imdms", 
+                       splitrule="logrank",
+                       importance="random", 
+                       B=10, 
+                       ci=90,
+                       parallel=FALSE, 
+                       conf=NULL, 
+                       verbose=FALSE, 
+                       seed=seed)
+
+   int.cph <- cph.int(X=X, 
+                      int.term=rownames(int.mdms))
+   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

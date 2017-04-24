@@ -1,26 +1,27 @@
-\name{rsf.int}
+\name{rsf.main}
 
-\alias{rsf.int}
+\alias{rsf.main}
 
 \title{
-    Bivariate Interaction Minimal Depth of a Maximal Subtree (IMDMS)
+    Univariate Minimal Depth of a Maximal Subtree (MDMS)
 }
 
 \description{
-    Ranking of pairwise interactions between individual or noise variables by bivariate interaction Minimal Depth of a Maximal Subtree (IMDMS)
+    Ranking of individual and noise variables main effects by univariate Minimal Depth of a Maximal Subtree (MDMS)
 }
 
 \usage{
-    rsf.int(X,
-            ntree = 1000,
-            method = "imdms",
-            splitrule = "logrank",
-            importance = "random",
-            B, ci = 90,
-            parallel = FALSE,
-            conf = NULL,
-            verbose = TRUE,
-            seed = NULL)
+    rsf.main(X,
+             ntree = 1000,
+             method = "mdms",
+             splitrule = "logrank",
+             importance = "random",
+             B,
+             ci = 90,
+             parallel = FALSE,
+             conf = NULL,
+             verbose = TRUE,
+             seed = NULL)
 }
 
 \arguments{
@@ -32,13 +33,13 @@
            "stime": \code{numeric} \code{vector} of observed times.
            "status": \code{numeric} \code{vector} of observed status (censoring) indicator variable.
          - each variable has a unique name, excluding the word "noise"
-    }
+   }
     \item{ntree}{
         Number of trees in the forest. Defaults to 1000.
     }
     \item{method}{
-        Method for ranking of interactions between pairs of individual and noise variables.
-        \code{character} string \code{"imdms"} (default) that stands for interaction minimal depth of a maximal subtree (IMDMS).
+        Method for ranking of individual and noise variables.
+        \code{character} string \code{"mdms"} (default) that stands for Univariate Minimal Depth of a Maximal Subtree (MDMS).
     }
     \item{splitrule}{
         Splitting rule used to grow trees. For time-to-event analysis, use \code{"logrank"} (default),
@@ -87,8 +88,7 @@
     but rather an OOB case is assigned a daughter node randomly whenever a split on \code{x} is encountered in the in-bag tree.
     If \code{"anti"} is used, then \code{x} is assigned to the opposite node whenever a split on \code{x} is encountered in the in-bag tree.
 
-    The function \code{rsf.int} relies on the R package \pkg{parallel} to create a parallel backend within an R session, enabling access to a cluster
-    of compute cores and/or nodes on a local and/or remote machine(s) and scaling-up with the number of CPU cores available and efficient parallel
+    The function \code{rsf.main} relies on the R package \pkg{parallel} to create a parallel backend within an R session, enabling access to a clusterof compute cores and/or nodes on a local and/or remote machine(s) and scaling-up with the number of CPU cores available and efficient parallel
     execution. To run a procedure in parallel (with parallel RNG), argument \code{parallel} is to be set to \code{TRUE} and argument \code{conf}
     is to be specified (i.e. non \code{NULL}). Argument \code{conf} uses the options described in function \code{makeCluster} of the R packages
     \pkg{parallel} and \pkg{snow}. \pkg{PRIMsrc} supports two types of communication mechanisms between master and worker processes:
@@ -120,16 +120,16 @@
 \value{
     \code{data.frame} containing the following columns:
     \itemize{ 
-        \item "obs.mean"    observed mean of covariates pairwise interaction statistics
-        \item "obs.se"      observed standard error of covariates pairwise interaction statistics
-        \item "obs.LBCI"    observed Lower Bound Confidence Interval of covariates pairwise interaction ranstatisticsks
-        \item "obs.UBCI"    observed Upper Bound Confidence Interval of covariates pairwise interaction statistics
-        \item "noise.mean"  observed mean of noise covariates statistics
-        \item "noise.se"    observed standard error of noise covariates pairwise interaction statistics
-        \item "noise.LBCI"  observed Lower Bound Confidence Interval of noise covariates pairwise interaction statistics
-        \item "noise.UBCI"  observed Upper Bound Confidence Interval of noise covariates pairwise interaction statistics
-        \item "signif.1SE"  calls of covariates pairwise interaction statistics significance using the 1SE rule
-        \item "signif.CI"   calls of covariates pairwise interaction statistics significance using the CI rule at \code{ci}\% confidence level
+        \item "obs.mean"    observed mean of covariates importances
+        \item "obs.se"      observed standard error of covariates importances
+        \item "obs.LBCI"    observed Lower Bound Confidence Interval of covariates importances
+        \item "obs.UBCI"    observed Upper Bound Confidence Interval of covariates importances
+        \item "noise.mean"  observed mean of noise covariates importances
+        \item "noise.se"    observed standard error of noise covariates ranks
+        \item "noise.LBCI"  observed Lower Bound Confidence Interval of noise covariates importances
+        \item "noise.UBCI"  observed Upper Bound Confidence Interval of noise covariates importances
+        \item "signif.1SE"  calls of covariates importances significance using the 1SE rule
+        \item "signif.CI"   calls of covariates importances significance using the CI rule at \code{ci}\% confidence level
     }
 }
 
@@ -182,7 +182,7 @@
    # All variables xj, j in {1,...,p}, are iid from a multivariate uniform distribution
    # with parmeters  a=1, b=5, i.e. on [1, 5].
    # rho = 0.50
-   # Regression model: X1 + X2 + X1X2
+   # Regression model: X1 + X5
    #==========================================================================================#
    seed <- 1234567
    set.seed(seed)
@@ -191,9 +191,8 @@
    x <- matrix(data=runif(n=n*p, min=1, max=5),
                nrow=n, ncol=p, byrow=FALSE,
                dimnames=list(1:n, paste("X", 1:p, sep="")))
-
-   beta <- c(rep(1,2), rep(0,p-2), 1)
-   covar <- cbind(x, "X1X2"=x[,1]*x[,2])
+   beta <- c(1,0,0,0,1)
+   covar <- x
    eta <- covar %*% beta                     # regression function
 
    seed <- 1234567
@@ -201,22 +200,22 @@
    lambda0 <- 1
    lambda <- lambda0 * exp(eta - mean(eta))  # hazards function
    tt <- rexp(n=n, rate=lambda)              # true (uncensored) event times
-   tc <- runif(n=n, min=0, max=3.9)          # true (censored) event times
+   tc <- runif(n=n, min=0, max=1.50)         # true (censored) event times
    stime <- pmin(tt, tc)                     # observed event times
    status <- 1 * (tt <= tc)                  # observed event indicator
    X <- data.frame(stime, status, x)
 
-   int.mdms <- rsf.int(X=X, 
-                       ntree=1000, 
-                       method="imdms", 
-                       splitrule="logrank",
-                       importance="random", 
-                       B=5, 
-                       ci=90,
-                       parallel=FALSE, 
-                       conf=NULL, 
-                       verbose=FALSE, 
-                       seed=seed)
+   main.mdms <- rsf.main(X=X, 
+                         ntree=1000, 
+                         method="mdms", 
+                         splitrule="logrank", 
+                         importance="random",
+                         B=5, 
+                         ci=90, 
+                         parallel=FALSE, 
+                         conf=NULL, 
+                         verbose=TRUE, 
+                         seed=seed)
 
    \dontrun{
       #===================================================

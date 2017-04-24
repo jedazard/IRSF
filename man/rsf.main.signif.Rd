@@ -1,13 +1,13 @@
-\name{rsf.int.signif}
+\name{rsf.main.signif}
 
-\alias{rsf.int.signif}
+\alias{rsf.main.signif}
 
 \title{
-    Subroutine of \code{rsf.int} function
+    Subroutine of \code{rsf.main} function
 }
 
 \description{
-    Subroutine for ranking of pairwise interactions between individual or noise variables by bivariate interaction Minimal Depth of a Maximal Subtree (IMDMS)
+    Subroutine for ranking of individual and noise variables main effects by univariate Minimal Depth of a Maximal Subtree (MDMS)
 }
 
 \author{
