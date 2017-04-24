@@ -31,10 +31,6 @@
     or non-linear pairwise statistical interactions between variables may be uncovered in clinical studies 
     with time-to-event outcomes of interest when the motivation is to discover important variables interactions
     with a predictive clinical value.
-
-    The DESCRIPTION file:
-    \packageDESCRIPTION{IRSF}
-    \packageIndices{IRSF}
 }
 
 \author{

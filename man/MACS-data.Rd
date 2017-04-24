@@ -28,14 +28,14 @@
   and the second was the three-level Race/Ethnicity variable [White, Hispanic, Black]. For each observation \eqn{i \in \{1,...,n\}}, we denote the \eqn{j}-th variable 
   by the \eqn{n}-dimensional vector \eqn{{\bf x}_{j} = (x_{1,j},...,x_{n,j})^{T}}, where \eqn{j \in \{1,...,p\}}. 
   Here, \eqn{p} denotes the number of variables. Hereafter, we denoted the \eqn{p=7} included variables as follows:
-  \enumerate{
-    \eqn{{\bf x}_{1}=\text{DEFB CNV}}
-    \eqn{{\bf x}_{2}=\text{CCR2 SNP}}
-    \eqn{{\bf x}_{3}=\text{CCR5 SNP}}
-    \eqn{{\bf x}_{4}=\text{CCR5 ORF}}
-    \eqn{{\bf x}_{5}=\text{CXCL12 SNP}} 
-    \eqn{{\bf x}_{6}=\text{Group}} 
-    \eqn{{\bf x}_{7}=\text{Race}}
+  \itemize{
+    \item \eqn{{\bf x}_{1}}=DEFB CNV
+    \item \eqn{{\bf x}_{2}}=CCR2 SNP
+    \item \eqn{{\bf x}_{3}}=CCR5 SNP
+    \item \eqn{{\bf x}_{4}}=CCR5 ORF
+    \item \eqn{{\bf x}_{5}}=CXCL12 SNP 
+    \item \eqn{{\bf x}_{6}}=Group 
+    \item \eqn{{\bf x}_{7}}=Race
   }
   
   The time-to-event outcomes included in the MACS cohort study, generically denoted E, were the time-to-X4-Emergence (denoted XE) and the time-to-AIDS-Diagnosis (denoted AD), 
