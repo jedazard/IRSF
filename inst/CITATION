@@ -1,0 +1,20 @@
+citHeader("To cite IRSF in publications use:")
+
+titl <- paste(meta$Package, ":", meta$Title, sep=" ")
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+vers <- paste("R package version", meta$Version)
+
+citEntry(entry       = "Article",
+         title       = "Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes",
+         author      = personList(person(family="Dazard", given="J-E."),
+                                  person(family="Ishwaran", given="H."),
+                                  person(family="Mehlotra", given="R.K."),
+                                  person(family="Weinberg", given="A."),
+                                  person(family="Zimmerman", given="P.A.")), 	
+         journal     = "submitted",
+         year        = "2017",
+         volume      = "",
+         number      = "",
+         pages       = "",
+         textVersion = "Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. (2017).
+                        Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes, (submitted).")
