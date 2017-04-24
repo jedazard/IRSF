@@ -4,7 +4,7 @@ Interaction Random Survival Forest (IRSF): Ensemble Survival Tree Models to Reve
 
 ==============
 ### Description
-The current version is a development release. It contains R codes in folders "/R" and "/inst/doc" for the analyses and the generation of the results shown in manuscript (Dazard et al., 2017). 
+The current version is a development release. It contains R codes in folders "/R" and "/inst/doc" for the analyses and the generation of the results shown in manuscript (Dazard et al., 2017), respectively. 
 Codes contain randomization, interaction modeling and prediction subroutines to be used in addition to the following R packages (http://cran.r-project.org/): [`survival`](https://CRAN.R-project.org/package=survival) for Kaplan-Meier and Cox regression modeling, [`NADA`](https://CRAN.R-project.org/package=NADA) for correlation analysis in the presence of censoring, [`randomForestSRC`](https://CRAN.R-project.org/package=randomForestSRC) for RSF modeling (Ishwaran and Kogalur, 2013, 2007), and [`ggRandomForests`](https://CRAN.R-project.org/package=ggRandomForests) (Ehrlinger, 2014) for Random Forrest exploration/visualization. Default parameter specifications were used for all main functions.
 
 
