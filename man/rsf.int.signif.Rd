@@ -11,8 +11,9 @@
 }
 
 \author{
-    \packageAuthor{IRSF}
-    Maintainer: \packageMaintainer{IRSF}
+    Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
+    
+    Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
 }
 
 \references{

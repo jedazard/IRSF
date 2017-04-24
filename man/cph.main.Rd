@@ -31,10 +31,6 @@
    }
 }
 
-\details{
-    None
-}
-
 \value{
     \code{List} of 2 fields:
     \item{raw}{Raw p-value covariates importances significance}
@@ -42,8 +38,9 @@
 }
 
 \author{
-    \packageAuthor{IRSF}
-    Maintainer: \packageMaintainer{IRSF}
+    Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
+    
+    Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
 }
 
 \references{

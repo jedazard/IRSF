@@ -26,10 +26,18 @@
   We used genetic variables with original and aggregated categories as follows: DEFB CNV [CNV = 2 or CNV > 2]; CCR2 SNP [GG or GA], CCR5 SNP [GG or GA]; 
   CCR5 ORF [WT or D32], CXCL12 SNP [GG or GA]. The first covariate was the two-level disease progression Group variable [Fast, Slow], 
   and the second was the three-level Race/Ethnicity variable [White, Hispanic, Black]. For each observation \eqn{i \in \{1,...,n\}}, we denote the \eqn{j}-th variable 
-  by the \eqn{n}-dimensional vector \eqn{\bf{x}_{j} = (x_{1,j},...,x_{n,j})^{T}}, where \eqn{j \in \{1,...,p\}}. 
-  Here, \eqn{p} denotes the number of variables. Hereafter, we denoted the \eqn{p=7} included variables as follows: 
-  \eqn{\bf{x}_{1}=DEFB CNV}, \eqn{\bf{x}_{2}=CCR2 SNP}, \eqn{\bf{x}_{3}=CCR5 SNP}, \eqn{\bf{x}_{4}=CCR5 ORF}, \eqn{\bf{x}_{5}=CXCL12 SNP}, \eqn{\bf{x}_{6}=Group}, \eqn{\bf{x}_{7}=Race}.
-
+  by the \eqn{n}-dimensional vector \eqn{{\bf x}_{j} = (x_{1,j},...,x_{n,j})^{T}}, where \eqn{j \in \{1,...,p\}}. 
+  Here, \eqn{p} denotes the number of variables. Hereafter, we denoted the \eqn{p=7} included variables as follows:
+  \enumerate{
+    \eqn{{\bf x}_{1}=\text{DEFB CNV}}
+    \eqn{{\bf x}_{2}=\text{CCR2 SNP}}
+    \eqn{{\bf x}_{3}=\text{CCR5 SNP}}
+    \eqn{{\bf x}_{4}=\text{CCR5 ORF}}
+    \eqn{{\bf x}_{5}=\text{CXCL12 SNP}} 
+    \eqn{{\bf x}_{6}=\text{Group}} 
+    \eqn{{\bf x}_{7}=\text{Race}}
+  }
+  
   The time-to-event outcomes included in the MACS cohort study, generically denoted E, were the time-to-X4-Emergence (denoted XE) and the time-to-AIDS-Diagnosis (denoted AD), 
   whether each was observed or not during each patient's follow-up time. The corresponding event-free (EF) ("survival") probability function S(t) of time-to-event \eqn{E := XE} 
   (X4-Emergence) or \eqn{E := AD} (AIDS-Diagnosis), were called X4-Emergence-Free (\eqn{E := XEF}) or AIDS-Diagnosis-Free (\eqn{E := ADF}) probability.
@@ -42,8 +50,9 @@
 }
 
 \author{
-    \packageAuthor{IRSF}
-    Maintainer: \packageMaintainer{IRSF}
+    Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
+    
+    Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
 }
 
 \references{

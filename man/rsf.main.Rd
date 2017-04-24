@@ -91,8 +91,8 @@
     The function \code{rsf.main} relies on the R package \pkg{parallel} to create a parallel backend within an R session, enabling access to a clusterof compute cores and/or nodes on a local and/or remote machine(s) and scaling-up with the number of CPU cores available and efficient parallel
     execution. To run a procedure in parallel (with parallel RNG), argument \code{parallel} is to be set to \code{TRUE} and argument \code{conf}
     is to be specified (i.e. non \code{NULL}). Argument \code{conf} uses the options described in function \code{makeCluster} of the R packages
-    \pkg{parallel} and \pkg{snow}. \pkg{PRIMsrc} supports two types of communication mechanisms between master and worker processes:
-    'Socket' or  'Message-Passing Interface' ('MPI'). In \pkg{PRIMsrc}, parallel 'Socket' clusters use sockets communication mechanisms only
+    \pkg{parallel} and \pkg{snow}. \pkg{IRSF} supports two types of communication mechanisms between master and worker processes:
+    'Socket' or  'Message-Passing Interface' ('MPI'). In \pkg{IRSF}, parallel 'Socket' clusters use sockets communication mechanisms only
     (no forking) and are therefore available on all platforms, including Windows, while parallel 'MPI' clusters use high-speed interconnects
     mechanism in networks of computers (with distributed memory) and are therefore available only in these architectures. A parallel 'MPI'
     cluster also requires R package \pkg{Rmpi} to be installed. Value \code{type} is used to setup a cluster of type 'Socket' ("SOCKET")
@@ -134,8 +134,9 @@
 }
 
 \author{
-    \packageAuthor{IRSF}
-    Maintainer: \packageMaintainer{IRSF}
+    Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
+    
+    Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
 }
 
 \references{

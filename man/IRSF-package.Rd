@@ -5,11 +5,14 @@
 \docType{package}
 
 \title{
-    \packageTitle{IRSF}
+    Interaction Random Survival Forest
 }
 
 \description{
-    \packageDescription{IRSF}
+    Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes. 
+    The current version is a development release. It contains R codes in folders "/R" and "/inst/doc" for the analyses 
+    and the generation of the results shown in manuscript (Dazard et al., 2017). 
+    Codes contain randomization, interaction modeling and prediction subroutines.
 }
 
 \details{
@@ -35,8 +38,9 @@
 }
 
 \author{
-    \packageAuthor{IRSF}
-    Maintainer: \packageMaintainer{IRSF}
+    Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
+    
+    Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
 }
 
 \references{
