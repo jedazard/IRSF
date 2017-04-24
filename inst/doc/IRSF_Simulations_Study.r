@@ -9,6 +9,7 @@ library("parallel")
 library("survival")
 library("randomForestSRC")
 library("abind")
+library("IRSF")
 
 library("ggRandomForests")
 library("NADA")
@@ -23,16 +24,6 @@ if (.Platform$OS.type == "unix") {
         library("Rmpi")
     }
 }
-
-#==========================================================================================#
-# Set the working directory
-#==========================================================================================#
-setwd(dir=file.path(".", fsep=.Platform$file.sep))
-
-#==========================================================================================
-# Source some R procedure files
-#==========================================================================================
-source(file=file.path(getwd(), "./R/IRSF.r", fsep=.Platform$file.sep))
 
 #==========================================================================================
 # Erasing the random seed if it exists and set it up to the default one

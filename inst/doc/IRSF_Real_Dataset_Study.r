@@ -9,6 +9,7 @@ library("parallel")
 library("survival")
 library("randomForestSRC")
 library("abind")
+library("IRSF")
 
 library("ggRandomForests")
 library("NADA")
@@ -23,16 +24,6 @@ if (.Platform$OS.type == "unix") {
         library("Rmpi")
     }
 }
-
-#==========================================================================================#
-# Set the working directory
-#==========================================================================================#
-setwd(dir=file.path("./R", fsep=.Platform$file.sep))
-
-#==========================================================================================
-# Source some R procedure files
-#==========================================================================================
-source(file=file.path(getwd(), "/IRSF.r", fsep=.Platform$file.sep))
 
 #==========================================================================================
 # Erasing the random seed if it exists and set it up to the default one
@@ -105,42 +96,16 @@ ntree <- 1000
 #============================================================================================
 # Read in the data
 #============================================================================================
-# data("MACS", package="IRSF")
-my.file <- paste(getwd(), "/data/MACS_Time_to_Event_Summary.txt", sep="")
-X4 <- read.delim(file=my.file, h=T, strip.white=T, blank.lines.skip=T, sep="\t", row.names=1)
-
-#============================================================================================
-# Construction of Random Survival Forest time-to-event models
-#============================================================================================
-X <- X4
-
-X$Race <- as.numeric(X4$Race)
-
-X$Group1 <- as.numeric(X4$Group1)
-X$Group2 <- as.numeric(X4$Group2)
-X$Group3 <- as.numeric(X4$Group3)
-
-X$DEFB.CNV1 <- as.numeric(X4$DEFB.CNV1)
-X$DEFB.CNV2 <- as.numeric(X4$DEFB.CNV2)
-X$DEFB.CNV3 <- as.numeric(X4$DEFB.CNV3)
-X$CCR2.SNP <- as.numeric(X4$CCR2.SNP)
-X$CCR5.SNP1 <- as.numeric(X4$CCR5.SNP1)
-X$CCR5.SNP2 <- as.numeric(X4$CCR5.SNP2)
-X$CCR5.SNP3 <- as.numeric(X4$CCR5.SNP3)
-X$CCR5.ORF <- as.numeric(X4$CCR5.ORF)
-X$CXCL12.SNP1 <- as.numeric(X4$CXCL12.SNP1)
-X$CXCL12.SNP2 <- as.numeric(X4$CXCL12.SNP2)
-X$CXCL12.SNP3 <- as.numeric(X4$CXCL12.SNP3)
-
-n <- nrow(X)
-p <- 7
+data("MACS", package="IRSF")
 
 formula.X <- as.formula(Surv(time=TTX, event=EventX, type="right") ~ 1  + Race + Group3 + DEFB.CNV3 + CCR2.SNP + CCR5.SNP2 + CCR5.ORF + CXCL12.SNP2)
 formula.A <- as.formula(Surv(time=TTA, event=EventA, type="right") ~ 1  + Race + Group3 + DEFB.CNV3 + CCR2.SNP + CCR5.SNP2 + CCR5.ORF + CXCL12.SNP2)
 
-WX <- X[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")]
-WA <- X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")]
+X <- MACS[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")]
+A <- MACS[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")]
 
+n <- nrow(X)
+p <- ncol(X) - 2
 
 #==========================================================================================
 # Global error rate from Random Survival Forests
@@ -151,7 +116,7 @@ WA <- X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CC
 # X4-Emergence outcome
 #=====================
 allX.rfsrc <- rfsrc(formula=formula.X,
-                    data=WX,
+                    data=X,
                     ntree=ntree,
                     bootstrap="by.root",
                     mtry=p,
@@ -195,7 +160,7 @@ allX.rfsrc$time.interest    # ordered unique event times
 # AIDS-Diagnosis outcome
 #========================
 allA.rfsrc <- rfsrc(formula=formula.A,
-                    data=WA,
+                    data=A,
                     ntree=ntree,
                     bootstrap="by.root",
                     mtry=p,
@@ -247,7 +212,7 @@ test <- setdiff(1:n, train)
 # primary call
 #=====================
 allX.train.rfsrc <- rfsrc(formula=formula.X,
-                          data=WX[train, ],
+                          data=X[train, ],
                           ntree=ntree,
                           bootstrap="by.root",
                           mtry=p,
@@ -267,7 +232,7 @@ allX.train.rfsrc <- rfsrc(formula=formula.X,
                           seed=12345678)
 
 allA.train.rfsrc <- rfsrc(formula=formula.A,
-                          data=WA[train, ],
+                          data=A[train, ],
                           ntree=ntree,
                           bootstrap="by.root",
                           mtry=p,
@@ -291,7 +256,7 @@ allA.train.rfsrc <- rfsrc(formula=formula.A,
 # overlays the 'test' data on the train-grown forest
 #=====================
 allX.pred <- predict(object=allX.train.rfsrc,
-                     newdata=WX[test, ],
+                     newdata=X[test, ],
                      importance="random",
                      na.action="na.omit",
                      outcome="test",
@@ -306,7 +271,7 @@ allX.pred <- predict(object=allX.train.rfsrc,
 allX.pred
 
 allA.pred <- predict(object=allA.train.rfsrc,
-                     newdata=WA[test, ],
+                     newdata=A[test, ],
                      importance="random",
                      na.action="na.omit",
                      outcome="test",
@@ -323,7 +288,7 @@ allA.pred
 
 #==========================================================================================
 # Plot of global prediction performance and Variable Importance from a RF-SRC analysis
-# Cumulative OOB Error Rate is between 0 and 1, and measures how well the predictor correctly 
+# Cumulative OOB Error Rate is between 0 and 1, and measures how well the predictor correctly
 # ranks (classifies) random individuals in terms of event probability.
 # A value of 0.5 is no better than random guessing.
 # A value of 0 is perfect.
@@ -349,13 +314,13 @@ ooberA <- sort(vimpA.obj$importance, decreasing=T)
 #====
 # TTX
 #====
-allX.main.mdms <- rsf.main(X=X[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
+allX.main.mdms <- rsf.main(X=MACS[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
                            ntree=ntree, method="mdms", splitrule="logrank", importance="random", B=1000, ci=80,
                            parallel=TRUE, conf=conf, verbose=TRUE, seed=12345678)
 #====
 # TTA
 #====
-allA.main.mdms <- rsf.main(X=X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
+allA.main.mdms <- rsf.main(X=MACS[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
                            ntree=ntree, method="mdms", splitrule="logrank", importance="random", B=1000, ci=80,
                            parallel=TRUE, conf=conf, verbose=TRUE, seed=12345678)
 
@@ -363,8 +328,8 @@ allA.main.mdms <- rsf.main(X=X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CC
 # Fits a Proportional Hazards Time-To-Event Regression Model saturated with first order terms.
 # Computes p-values of significance of regression coefficients of main effects in a Cox-PH model
 #==========================================================================================#
-allX.main.cph <- cph.main(X=X[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], main.term=rownames(allX.main.mdms))
-allA.main.cph <- cph.main(X=X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], main.term=rownames(allA.main.mdms))
+allX.main.cph <- cph.main(X=MACS[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], main.term=rownames(allX.main.mdms))
+allA.main.cph <- cph.main(X=MACS[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], main.term=rownames(allA.main.mdms))
 
 #==========================================================================================
 # Ranking of interactions between pairs of individual and noise variables by
@@ -375,14 +340,14 @@ allA.main.cph <- cph.main(X=X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR
 #====
 # TTX
 #====
-allX.int.mdms <- rsf.int(X=X[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
+allX.int.mdms <- rsf.int(X=MACS[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
                          ntree=ntree, method="imdms", splitrule="logrank", importance="random", B=1000, ci=80,
                          parallel=TRUE, conf=conf, verbose=TRUE, seed=12345678)
 
 #====
 # TTA
 #====
-allA.int.mdms <- rsf.int(X=X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
+allA.int.mdms <- rsf.int(X=MACS[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")],
                          ntree=ntree, method="imdms", splitrule="logrank", importance="random", B=1000, ci=80,
                          parallel=TRUE, conf=conf, verbose=TRUE, seed=12345678)
 
@@ -390,8 +355,8 @@ allA.int.mdms <- rsf.int(X=X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2
 # Fits a Proportional Hazards Time-To-Event Regression Model saturated with first and second order terms
 # Computes p-values of significance of regression coefficients of pairwise interaction effects in a Cox-PH model
 #==========================================================================================
-allX.int.cph <- cph.int(X=X[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], int.term=rownames(allX.int.mdms))
-allA.int.cph <- cph.int(X=X[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], int.term=rownames(allA.int.mdms))
+allX.int.cph <- cph.int(X=MACS[,c("TTX","EventX","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], int.term=rownames(allX.int.mdms))
+allA.int.cph <- cph.int(X=MACS[,c("TTA","EventA","Race","Group3","DEFB.CNV3","CCR2.SNP","CCR5.SNP2","CCR5.ORF","CXCL12.SNP2")], int.term=rownames(allA.int.mdms))
 
 
 
