@@ -25,8 +25,8 @@
   and 2 non-genetic variables, taken as two additional covariates. All input variables were categorical with no more than three levels (experimental groups) each. 
   We used genetic variables with original and aggregated categories as follows: DEFB CNV [CNV = 2 or CNV > 2]; CCR2 SNP [GG or GA], CCR5 SNP [GG or GA]; 
   CCR5 ORF [WT or D32], CXCL12 SNP [GG or GA]. The first covariate was the two-level disease progression Group variable [Fast, Slow], 
-  and the second was the three-level Race/Ethnicity variable [White, Hispanic, Black]. For each observation \eqn{i \in \{1,\ldtos,n\}}, we denote the \eqn{j}-th variable 
-  by the \eqn{n}-dimensional vector \eqn{\bf{x}_{j} = (x_{1,j},\ldots,x_{n,j})^{T}}, where \eqn{j \in \{1,\ldots,p\}}. 
+  and the second was the three-level Race/Ethnicity variable [White, Hispanic, Black]. For each observation \eqn{i \in \{1,...,n\}}, we denote the \eqn{j}-th variable 
+  by the \eqn{n}-dimensional vector \eqn{\bf{x}_{j} = (x_{1,j},...,x_{n,j})^{T}}, where \eqn{j \in \{1,...,p\}}. 
   Here, \eqn{p} denotes the number of variables. Hereafter, we denoted the \eqn{p=7} included variables as follows: 
   \eqn{\bf{x}_{1}=DEFB CNV}, \eqn{\bf{x}_{2}=CCR2 SNP}, \eqn{\bf{x}_{3}=CCR5 SNP}, \eqn{\bf{x}_{4}=CCR5 ORF}, \eqn{\bf{x}_{5}=CXCL12 SNP}, \eqn{\bf{x}_{6}=Group}, \eqn{\bf{x}_{7}=Race}.
 
