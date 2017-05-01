@@ -227,7 +227,7 @@
       #===================================================
       cpus <- detectCores(logical = TRUE)
       conf <- list("spec" = rep("localhost", cpus),
-                   "type" = "SOCK",
+                   "type" = "SOCKET",
                    "homo" = TRUE,
                    "verbose" = TRUE,
                    "outfile" = "")
@@ -243,7 +243,7 @@
       cpus <- 8
       conf <- list("spec" = c(rep(masterhost, cpus),
                               rep(slavehosts, cpus)),
-                   "type" = "SOCK",
+                   "type" = "SOCKET",
                    "homo" = TRUE,
                    "verbose" = TRUE,
                    "outfile" = "")
