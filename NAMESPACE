@@ -1,7 +1,11 @@
 exportPattern("^[[:alpha:]]+")
 
-import("parallel", "survival", "randomForestSRC", "abind")
-importFrom("stats", "as.formula", "p.adjust", "quantile", "runif", "sd")
+import("survival")
+import("randomForestSRC")
+import("abind")
+
+import("parallel")
+importFrom("stats", as.formula, p.adjust, quantile, runif, sd)
 
 export("rsf.main", 
        "rsf.int", 
