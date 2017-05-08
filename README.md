@@ -1,101 +1,141 @@
-# IRSF
-Interaction Random Survival Forest (IRSF): Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes
+### License
+
+PRIMsrc is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
+sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
+[GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
 
 
-===============
-### Description
-The current version is a development release. It contains R codes in folders "/R" and "/inst/doc" for the analyses and the generation of the results shown in manuscript (Dazard et al., 2017), respectively. 
-Codes contain randomization, interaction modeling and prediction subroutines to be used in addition to the following R packages (http://cran.r-project.org/): [`survival`](https://CRAN.R-project.org/package=survival) for Kaplan-Meier and Cox regression modeling, [`randomForestSRC`](https://CRAN.R-project.org/package=randomForestSRC) for RSF modeling (Ishwaran and Kogalur, 2013, 2007), and [`ggRandomForests`](https://CRAN.R-project.org/package=ggRandomForests) (Ehrlinger, 2014) for Random Forrest exploration/visualization. Default parameter specifications were used for all main functions.
+=============
+### Downloads
+
+CRAN downloads since initial release to CRAN (2015-07-28):
+[![](http://cranlogs.r-pkg.org/badges/grand-total/PRIMsrc)](http://cran.rstudio.com/package=PRIMsrc)
+as tracked by [RStudio CRAN mirror](http://cran-logs.rstudio.com/)
+
+CRAN downloads in the last month:
+[![](http://cranlogs.r-pkg.org/badges/last-month/PRIMsrc)](http://cran.rstudio.com/package=PRIMsrc)
+
+CRAN downloads in the last week:
+[![](http://cranlogs.r-pkg.org/badges/last-week/PRIMsrc)](http://cran.rstudio.com/package=PRIMsrc)
 
 
 ============
-### Abstract
-Unraveling interactions among variables such as genetic, clinical, demographic and environmental factors is essential to understand the development of common and complex diseases. To increase the power to detect such variables interactions associated with clinical time-to-events outcomes, we borrowed established concepts from Random Survival Forest (RSF) models. We introduce a novel RSF-based pairwise interaction estimator and derive a randomization method with bootstrap confidence intervals for inferring interaction significance. Using various linear and non-linear time-to-events survival models in simulation studies, we first show the efficiency of our approach: true pairwise interaction-effects between variables are thus uncovered, while they may not be accompanied with their corresponding main-effects and often not detected by standard semi-parametric Cox regression. Moreover, using a RSF-based cross-validation scheme for generating prediction estimators, we show that informative predictors may thus be inferred. We illustrate the application of our approach in an HIV cohort study recording key host gene polymorphisms and their association with HIV change of tropism or AIDS progression. Altogether, this shows how linear or non-linear pairwise statistical interactions between variables may be uncovered in clinical studies with time-to-event outcomes of interest when the motivation is to discover important variables interactions with a predictive clinical value.
+### Branches
 
-##### Key words (5)
-Random Survival Forest; Interaction Detection and Modeling; Time-to-Event Analysis; Epistasis; Genetic Variations Interactions.
+- The default branch (master) hosts the current development release (version 0.7.0) of the survival bump hunting procedure that implements the case of a survival response. At this point, this version is also restricted to a directed peeling search of the first box covered by the recursive coverage (outer) loop of our Patient Recursive Survival Peeling (PRSP) algorithm (Dazard et al., 2014, 2015, 2016). New features will be added soon as they are available. 
 
+The package relies on an optional variable screening (pre-selection) procedure that is run before the PRSP algorithm and final variable usage (selection) procedure is done. This is done by four possible cross-validated variable screening (pre-selection) procedures offered to the user from the main end-user survival Bump Hunting function `sbh()`. At this point, the user can choose between:
 
-===========
-### License
+   + Univariate Patient Recursive Survival Peeling algorithm (default of package `PRIMsrc`)
+   + Penalized Censored Quantile Regression (by Semismooth Newton Coordinate Descent algorithm adapted from package `hqreg`)
+   + Penalized Partial Likelihood (adapted from package `glmnet`)
+   + Supervised Principal Component Analysis (adapted from package `superpc`)
+   
+In this version, the Cross-Validation (CV) procedure and Bump Hunting procedures that control model size (#covariates) and model complexity (#peeling steps), respectively, to fit the Survival Bump Hunting model, are carried out internally by two consecutive tasks within a single main end-user survival Bump Hunting function `sbh()`. The returned S3-class `sbh` object contains cross-validated estimates of all the decision-rules of used covariates and all other statistical quantities of interest at each iteration of the peeling sequence (inner loop of the PRSP algorithm). This enables the graphical display of results of profiling curves for model selection/tuning, peeling trajectories, covariate traces and survival distributions (see companion papers Dazard et al., 2014, 2015, 2016 for details). 
 
-IRSF is open source / free software, licensed under the GNU General Public License version 3 (GPLv3), 
-sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy of this license, visit 
-[GNU Free Documentation License](http://www.gnu.org/licenses/gpl-3.0.html).
+The package `PRIMsrc` offers a number of options for the number of replications of the fitting procedure to be perfomed: \eqn{B}; the type of \eqn{K}-fold cross-validation desired: (replicated)-averaged or-combined; as well as the peeling and cross-validation critera for model selection/tuning, and a few more parameters for the PRSP algorithm. The package takes advantage of the R packages `parallel` and `snow`, which allows users to create a parallel backend within an R session, enabling access to a cluster of compute cores and/or nodes on a local and/or remote machine(s) with either. The package supports two types of communication mechanisms between master and worker processes: 'Socket' or  'Message-Passing Interface' ('MPI').
+
+- The second branch (unified) will host the future complete version of the code (version 1.0.0), including undirected peeling search derived from the Patient Rule Induction Method (PRIM), that will allow the unified treatment of bump hunting for every type of common response: Survival, Regression and Classification (SRC).
 
 
 ================
 ### Requirements
 
-IRSF development version (1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.0 (2017-04-21) and Travis CI. 
+PRIMsrc 0.7.0 requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.0 (2017-04-21) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
+
+See Travis CI build result:
+[![Build Status](https://travis-ci.org/jedazard/PRIMsrc.png?branch=master)](https://travis-ci.org/jedazard/PRIMsrc)
+
+See CRAN checks:
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/PRIMsrc)](https://cran.r-project.org/web/checks/check_results_PRIMsrc.html).
 
 
 ================
 ### Installation
 
-* To install the most up-to-date development version (>= 1.0.0) of [`IRSF` from GitHub repository](https://github.com/jedazard/IRSF) 
-using devtools, simply run:
+* To install [`PRIMsrc` from CRAN repository](https://CRAN.R-project.org/package=PRIMsrc), simply download and install the current version (0.7.0) from the CRAN repository:
+
+```{r}
+install.packages("PRIMsrc")
+```
+
+* Alternatively, you can install the most up-to-date development version (>= 0.7.0) of [`PRIMsrc` from GitHub repository](https://github.com/jedazard/PRIMsrc) using devtools, simply run:
 
 ```{r}
 install.packages("devtools")
 library("devtools")
-devtools::install_github(repo="jedazard/IRSF")
+devtools::install_github("jedazard/PRIMsrc")
 ```
 
 =========
 ### Usage
 
-* To load the IRSF library in an R session and start using it:
+* To load the PRIMsrc library in an R session and start using it:
 
 ```{r}
-library("IRSF")
+library("PRIMsrc")
+```
+
+* Check the package news with the R command:
+
+```{r}
+PRIMsrc.news()
 ```
 
 * Check on how to cite the package with the R command:
 
 ```{r}
-citation("IRSF")
+citation("PRIMsrc")
 ```
 
 etc...
 
 
-==============
-### References
+==================
+### Website - Wiki
 
-   + Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. 
-   *Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes*. 
-   [submitted (2017)]
-
-   + Ishwaran, H. and Kogalur, U.B. 
-   *Contributed R Package `randomForestSRC`: Random Forests for Survival, Regression and Classification (RF-SRC)*. 
-   [CRAN (2013)](https://CRAN.R-project.org/package=randomForestSRC)
-
-   + Ishwaran H. and Kogalur U.B. 
-   *Random Survival Forests for R*. 
-   [R News, 7(2), 25-31, (2007)](https://pdfs.semanticscholar.org/951a/84f0176076fb6786fdf43320e8b27094dcfa.pdf)
-
-   + Ehrlinger J. 
-   *Contributed R Package `ggRandomForests`: Visually Exploring Random Forests*. 
-   [CRAN (2014)](https://CRAN.R-project.org/package=ggRandomForests)
-
-   + Shepherd, J. C., et al. 
-   *Emergence and Persistence of Cxcr4-Tropic Hiv-1 in a Population of Men from the Multicenter Aids Cohort Study*. 
-   [J Infect Dis, 198, 1104-1112 (2008)](https://www.ncbi.nlm.nih.gov/pubmed/18783316).
+- See Project [Website](http://www.primsrc.com) for General Remarks, Goal and Why Use PRIMsrc.
+- See Project [Wiki](https://github.com/jedazard/PRIMsrc/wiki) for Roadmap, Documentation and Examples, Publications, Case Studies, Support and How to contribute (code and documentation).
 
 
 ===================
 ### Acknowledgments
 
 Authors: 
-   + Jean-Eudes Dazard, Ph.D. [jean-eudes.dazard@case.edu](jean-eudes.dazard@case.edu)
+   + Jean-Eudes Dazard, Ph.D. [(jean-eudes.dazard@case.edu)](jean-eudes.dazard@case.edu)
+   + Michael Choe, M.D. [(mjc206@case.edu)](mjc206@case.edu)
+   + Michael LeBlanc, Ph.D. [(mleblanc@fhcrc.org)](mleblanc@fhcrc.org)
+   + Alberto Santana, MBA. [(ahs4@case.edu)](ahs4@case.edu)
 
 Maintainers: 
-   + Jean-Eudes Dazard, Ph.D. [jean-eudes.dazard@case.edu](jean-eudes.dazard@case.edu)
+   + Jean-Eudes Dazard, Ph.D. [(jean-eudes.dazard@case.edu)](jean-eudes.dazard@case.edu)
 
 Funding/Provision/Help:   
-   + This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University. 
-   + We are thankful to Ms. Janet Schollenberger, Senior Project Coordinator, CAMACS, as well as Dr. Jeremy J. Martinson, Sudhir Penugonda, Shehnaz K. Hussain, Jay H. Bream, and Priya Duggal, for providing us the data related to the samples analyzed in the present study. Data in this manuscript were collected by the Multicenter AIDS Cohort Study (MACS) at (http://www.statepi.jhsph.edu/macs/macs.html) with centers at Baltimore, Chicago, Los Angeles, Pittsburgh, and the Data Coordinating Center: The Johns Hopkins University Bloomberg School of Public Health.
-   + The MACS is funded primarily by the National Institute of Allergy and Infectious Diseases (NIAID), with additional co-funding from the National Cancer Institute (NCI), the National Heart, Lung, and Blood Institute (NHLBI), and the National Institute on Deafness and Communication Disorders (NIDCD). MACS data collection is also supported by Johns Hopkins University CTSA. This study was supported by two grants from the National Institute of Health: NIDCR P01DE019759 (Aaron Weinberg, Peter Zimmerman, Richard J. Jurevic, Mark Chance) and NCI R01CA163739 (Hemant Ishwaran). The work was also partly supported by the National Science Foundation grant DMS 1148991 (Hemant Ishwaran) and the Center for AIDS Research grant P30AI036219 (Mark Chance).
+   + This project was partially funded by the National Institutes of Health NIH - National Cancer Institute (R01-CA160593) to J-E. Dazard and J.S. Rao.
+
+
+==============
+### References
+
+   + Dazard J-E. and Rao J.S. (2017). 
+      *Variable Selection Strategies for High-Dimensional Survival Bump Hunting using Recursive Peeling Methods*. 
+      (in prep).
+   + Yi C. and Huang J. (2016).
+      *Semismooth Newton Coordinate Descent Algorithm for Elastic-Net Penalized Huber Loss Regression and Quantile             Regression*. 
+      J. Comp Graph. Statistics, DOI: 10.1080/10618600.2016.1256816.
+   + Dazard J-E., Choe M., LeBlanc M. and Rao J.S. (2016). 
+      *Cross-validation and Peeling Strategies for Survival Bump Hunting using Recursive Peeling Methods*. 
+      Statistical Analysis and Data Mining, 9(1):12-42. 
+   + Dazard J-E., Choe M., LeBlanc M. and Rao J.S. (2015). 
+      *R package PRIMsrc: Bump Hunting by Patient Rule Induction Method for Survival, Regression and                          Classification*. 
+      In JSM Proceedings, Statistical Programmers and Analysts Section. Seattle, WA, USA. 
+      American Statistical Association IMS - JSM, p. 650-664. 
+   + Dazard J-E., Choe M., LeBlanc M. and Rao J.S. (2014).
+      *Cross-Validation of Survival Bump Hunting by Recursive Peeling Methods*. 
+      In JSM Proceedings, Survival Methods for Risk Estimation/Prediction Section. Boston, MA, USA. 
+      American Statistical Association IMS - JSM, p. 3366-3380. 
+   + Dazard J-E. and J.S. Rao (2010).
+      *Local Sparse Bump Hunting*. 
+      J. Comp Graph. Statistics, 19(4):900-92.
