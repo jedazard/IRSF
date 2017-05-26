@@ -35,8 +35,7 @@ Installation has been tested on Windows, Linux, OSX and Solaris platforms.
 ================
 ### Installation
 
-* To install the most up-to-date development version (>= 1.0.0) of [`IRSF` from GitHub repository](https://github.com/jedazard/IRSF) 
-using devtools, simply run:
+* To install the most up-to-date development version (>= 1.0.0) of [`IRSF` from GitHub repository](https://github.com/jedazard/IRSF) using devtools, simply run:
 
 ```{r}
 install.packages("devtools")
