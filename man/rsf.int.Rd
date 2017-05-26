@@ -223,6 +223,12 @@
       #===================================================
       # Examples of parallel backend parametrization
       #===================================================
+      if (require("parallel")) {
+         print("'parallel' is attached correctly \n")
+      } else {
+         stop("'parallel' must be attached first \n")
+      }
+      #===================================================
       # Example #1 - Quad core PC
       # Running WINDOWS with SOCKET communication
       #===================================================
@@ -255,12 +261,12 @@
       # of requested core CPUs, which is specified from
       # within a SLURM script.
       #===================================================
-      cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
       if (require("Rmpi")) {
-         print("Rmpi is loaded correctly \n")
+          print("'Rmpi' is attached correctly \n")
       } else {
-         stop("Rmpi must be installed first \n")
+          stop("'Rmpi' must be attached first \n")
       }
+      cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
       conf <- list("spec" = cpus,
                    "type" = "MPI",
                    "homo" = TRUE,
