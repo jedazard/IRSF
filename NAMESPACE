@@ -5,7 +5,6 @@ import("randomForestSRC")
 import("abind")
 
 import("parallel")
-import("Rmpi")
 importFrom("stats", as.formula, p.adjust, quantile, runif, sd)
 
 export("rsf.main", 
