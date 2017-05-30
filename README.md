@@ -41,6 +41,9 @@ IRSF development version (1.0.0) requires R-3.0.2 (2013-09-25). It was built and
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
+See Travis CI build result:
+[![Build Status](https://travis-ci.org/jedazard/IRSF.png?branch=master)](https://travis-ci.org/jedazard/IRSF)
+
 
 ================
 ### Installation
