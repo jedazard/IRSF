@@ -37,7 +37,7 @@ sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy
 ================
 ### Requirements
 
-IRSF development version (1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.0 (2017-04-21) and Travis CI. 
+IRSF (>= 1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.0 (2017-04-21) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
@@ -48,7 +48,8 @@ See Travis CI build result:
 ================
 ### Installation
 
-* To install the most up-to-date development version (>= 1.0.0) of [`IRSF` from GitHub repository](https://github.com/jedazard/IRSF) using devtools, simply run:
+* To install the most up-to-date development version (>= 1.0.0) of `IRSF` from the [GitHub](https://github.com/jedazard/IRSF) repository, 
+simply run the following using devtools:
 
 ```{r}
 install.packages("devtools")
