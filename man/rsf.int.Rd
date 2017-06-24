@@ -119,7 +119,7 @@
 
 \value{
     \code{data.frame} containing the following columns:
-    \itemize{ 
+    \itemize{
         \item "obs.mean"    observed mean of covariates pairwise interaction statistics
         \item "obs.se"      observed standard error of covariates pairwise interaction statistics
         \item "obs.LBCI"    observed Lower Bound Confidence Interval of covariates pairwise interaction ranstatisticsks
@@ -135,7 +135,7 @@
 
 \author{
     Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
-    
+
     Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
 }
 
@@ -173,6 +173,7 @@
 }
 
 \examples{
+   \dontrun{
    #===================================================
    # Loading the library and its dependencies
    #===================================================
@@ -207,70 +208,72 @@
    status <- 1 * (tt <= tc)                  # observed event indicator
    X <- data.frame(stime, status, x)
 
-   int.mdms <- rsf.int(X=X, 
-                       ntree=1000, 
-                       method="imdms", 
-                       splitrule="logrank",
-                       importance="random", 
-                       B=5, 
-                       ci=90,
-                       parallel=FALSE, 
-                       conf=NULL, 
-                       verbose=FALSE, 
-                       seed=seed)
+   #===================================================
+   # Examples of parallel backend parametrization
+   #===================================================
+   if (require("parallel")) {
+      print("'parallel' is attached correctly \n")
+   } else {
+      stop("'parallel' must be attached first \n")
+   }
 
-   \dontrun{
-      #===================================================
-      # Examples of parallel backend parametrization
-      #===================================================
-      if (require("parallel")) {
-         print("'parallel' is attached correctly \n")
-      } else {
-         stop("'parallel' must be attached first \n")
-      }
-      #===================================================
-      # Example #1 - Quad core PC
-      # Running WINDOWS with SOCKET communication
-      #===================================================
-      cpus <- detectCores(logical = TRUE)
-      conf <- list("spec" = rep("localhost", cpus),
-                   "type" = "SOCKET",
-                   "homo" = TRUE,
-                   "verbose" = TRUE,
-                   "outfile" = "")
-      #===================================================
-      # Example #2 - Master node + 3 Worker nodes cluster
-      # Running LINUX with SOCKET communication
-      # All nodes equipped with identical setups of
-      # multicores (8 core CPUs per machine for a total of 32)
-      #===================================================
-      masterhost <- Sys.getenv("HOSTNAME")
-      slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
-      nodes <- length(slavehosts) + 1
-      cpus <- 8
-      conf <- list("spec" = c(rep(masterhost, cpus),
-                              rep(slavehosts, cpus)),
-                   "type" = "SOCKET",
-                   "homo" = TRUE,
-                   "verbose" = TRUE,
-                   "outfile" = "")
-      #===================================================
-      # Example #3 - Multinode of multicore per node cluster
-      # Running LINUX with SLURM scheduler and MPI communication
-      # Below, variable 'cpus' is the total number
-      # of requested core CPUs, which is specified from
-      # within a SLURM script.
-      #===================================================
-      if (require("Rmpi")) {
-          print("'Rmpi' is attached correctly \n")
-      } else {
-          stop("'Rmpi' must be attached first \n")
-      }
-      cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
-      conf <- list("spec" = cpus,
-                   "type" = "MPI",
-                   "homo" = TRUE,
-                   "verbose" = TRUE,
-                   "outfile" = "")
+   #===================================================
+   # Example #1 - Quad core PC
+   # Running WINDOWS with SOCKET communication
+   #===================================================
+   cpus <- detectCores(logical = TRUE)
+   conf <- list("spec" = rep("localhost", cpus),
+                "type" = "SOCKET",
+                "homo" = TRUE,
+                "verbose" = TRUE,
+                "outfile" = "")
+
+   #===================================================
+   # Example #2 - Master node + 3 Worker nodes cluster
+   # Running LINUX with SOCKET communication
+   # All nodes equipped with identical setups of
+   # multicores (8 core CPUs per machine for a total of 32)
+   #===================================================
+   masterhost <- Sys.getenv("HOSTNAME")
+   slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
+   nodes <- length(slavehosts) + 1
+   cpus <- 8
+   conf <- list("spec" = c(rep(masterhost, cpus),
+                           rep(slavehosts, cpus)),
+                "type" = "SOCKET",
+                "homo" = TRUE,
+                "verbose" = TRUE,
+                "outfile" = "")
+
+   #===================================================
+   # Example #3 - Multinode of multicore per node cluster
+   # Running LINUX with SLURM scheduler and MPI communication
+   # Below, variable 'cpus' is the total number
+   # of requested core CPUs, which is specified from
+   # within a SLURM script.
+   #===================================================
+   if (require("Rmpi")) {
+      print("'Rmpi' is attached correctly \n")
+   } else {
+      stop("'Rmpi' must be attached first \n")
+   }
+   cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
+   conf <- list("spec" = cpus,
+                "type" = "MPI",
+                "homo" = TRUE,
+                "verbose" = TRUE,
+                "outfile" = "")
+
+   int.mdms <- rsf.int(X=X,
+                       ntree=1000,
+                       method="imdms",
+                       splitrule="logrank",
+                       importance="random",
+                       B=1000,
+                       ci=90,
+                       parallel=FALSE,
+                       conf=NULL,
+                       verbose=FALSE,
+                       seed=seed)
    }
 }
