@@ -2,7 +2,7 @@ Package: IRSF
 Type: Package
 Title: Interaction Random Survival Forest
 Version: 1.0.0
-Date: 2017-05-26
+Date: 2017-06-24
 Authors@R: person("Jean-Eudes", "Dazard",
                    role = c("aut", "cre"),
                    email = "jean-eudes.dazard@case.edu")
