@@ -1,7 +1,7 @@
 Package: IRSF
 
 ---------------------------------------------------------------------------------
-Date   : 2017-05-26
+Date   : 2017-06-24
 o RELEASE 1.0.0
 - Initial release to GitHub.
 - Built and tested under R version 3.4.0 (2017-04-21).
