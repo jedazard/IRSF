@@ -37,7 +37,7 @@ sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy
 ================
 ### Requirements
 
-IRSF (>= 1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.0 (2017-04-21) and Travis CI. 
+IRSF (>= 1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.1 (2017-06-30) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
