@@ -95,7 +95,7 @@ Funding/Provision/Help:
 
    + Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. 
    *Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting*. 
-   [Statistical Applications in Genetics and Molecular Biology (in press, 2017)]
+   [Statistical Applications in Genetics and Molecular Biology (in press, 2017)](https://www.degruyter.com/view/j/sagmb)
 
    + Ishwaran, H. and Kogalur, U.B. 
    *Contributed R Package `randomForestSRC`: Random Forests for Survival, Regression and Classification (RF-SRC)*. 
