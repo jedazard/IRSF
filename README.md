@@ -37,7 +37,7 @@ sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy
 ================
 ### Requirements
 
-IRSF (>= 1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.1 (2017-06-30) and Travis CI. 
+IRSF (>= 1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.2 (2017-09-28) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
@@ -94,8 +94,8 @@ Funding/Provision/Help:
 ### References
 
    + Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. 
-   *Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes*. 
-   [submitted (2017)]
+   *Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting*. 
+   [Statistical Applications in Genetics and Molecular Biology (in press, 2017)]
 
    + Ishwaran, H. and Kogalur, U.B. 
    *Contributed R Package `randomForestSRC`: Random Forests for Survival, Regression and Classification (RF-SRC)*. 
