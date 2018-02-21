@@ -9,7 +9,7 @@
 }
 
 \description{
-    Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes. 
+    Ensemble survival tree models to reveal pairwise interactions of variables in association with time-to-events outcomes. 
     The current version is a development release. It contains R codes in folders "/R" and "/inst/doc" for the analyses 
     and the generation of the results shown in manuscript (Dazard et al., 2017), respectively. 
     Codes contain randomization, interaction modeling and prediction subroutines.
@@ -42,8 +42,8 @@
 \references{
     \itemize{
         \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A.
-              "\emph{Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes}"
-              Submitted (2017).
+              "\emph{Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting}"
+              Statistical Applications in Genetics and Molecular Biology, DOI: 10.1515/sagmb-2017-0038 (2017).
         \item Ishwaran, H. and Kogalur, U.B.
               "\emph{Random Survival Forests for R}.
               R News, 7(2), 25-31, (2007).

@@ -58,8 +58,8 @@
 \references{
     \itemize{
         \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A.
-              "\emph{Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes}"
-              Submitted (2017).
+              "\emph{Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting}"
+              Statistical Applications in Genetics and Molecular Biology, DOI: 10.1515/sagmb-2017-0038 (2017).
         \item Shepherd, J.C., et al.
               "\emph{Emergence and Persistence of Cxcr4-Tropic Hiv-1 in a Population of Men from the Multicenter Aids Cohort Study}"
               J Infect Dis, 198, 1104-1112 (2008).
