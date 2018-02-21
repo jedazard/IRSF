@@ -13,7 +13,7 @@ citEntry(entry       = "Article",
                                   person(family="Zimmerman", given="P.A.")), 	
          journal     = "Statistical Applications in Genetics and Molecular Biology",
          year        = "2017",
-         volume      = "(in press)",
+         volume      = "DOI: 10.1515/sagmb-2017-0038",
          number      = "",
          pages       = "",
          textVersion = "Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. (2017).

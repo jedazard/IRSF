@@ -6,8 +6,8 @@ o RELEASE 1.0.0
 - Initial release to GitHub.
 - Built and tested under R version 3.4.0 (2017-04-21).
 ---------------------------------------------------------------------------------
-Date   : 2017-10-11
-o RELEASE 1.0.0
-- Updates in documentation files (DESCRIPTION, CITATION, NEWS and README).
+Date   : 2018-02-21
+o RELEASE 1.0.1
+- Updates in documentation files (DESCRIPTION, RD, CITATION, NEWS and README).
 - Built and tested under R version 3.4.2 (2017-09-28) and release update to GitHub.
 ---------------------------------------------------------------------------------
