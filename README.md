@@ -17,7 +17,7 @@ Random Survival Forest; Interaction Detection and Modeling; Time-to-Event Analys
 ============
 ### Branches
 
-- The default branch (master) hosts the current development release (version 1.0.0). 
+- The default branch (master) hosts the current development release (version 1.0.1). 
 
 
 ===========
@@ -37,7 +37,7 @@ sponsored by the [Free Software Foundation](http://www.fsf.org/). To view a copy
 ================
 ### Requirements
 
-IRSF (>= 1.0.0) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.2 (2017-09-28) and Travis CI. 
+IRSF (>= 1.0.1) requires R-3.0.2 (2013-09-25). It was built and tested under R version 3.4.2 (2017-09-28) and Travis CI. 
 
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
@@ -48,7 +48,7 @@ See Travis CI build result:
 ================
 ### Installation
 
-* To install the most up-to-date development version (>= 1.0.0) of `IRSF` from the [GitHub](https://github.com/jedazard/IRSF) repository, 
+* To install the most up-to-date development version (>= 1.0.1) of `IRSF` from the [GitHub](https://github.com/jedazard/IRSF) repository, 
 simply run the following using devtools:
 
 ```{r}
@@ -95,7 +95,7 @@ Funding/Provision/Help:
 
    + Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. 
    *Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting*. 
-   [Statistical Applications in Genetics and Molecular Biology (in press, 2017)](https://www.degruyter.com/view/j/sagmb)
+   [Statistical Applications in Genetics and Molecular Biology (DOI: 10.1515/sagmb-2017-0038, 2017)](https://www.degruyter.com/view/j/sagmb.2018.17.issue-1/sagmb-2017-0038/sagmb-2017-0038.xml)
 
    + Ishwaran, H. and Kogalur, U.B. 
    *Contributed R Package `randomForestSRC`: Random Forests for Survival, Regression and Classification (RF-SRC)*. 
