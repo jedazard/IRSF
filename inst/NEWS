@@ -11,3 +11,12 @@ o RELEASE 1.0.1
 - Updates in documentation files (DESCRIPTION, RD, CITATION, NEWS and README).
 - Built and tested under R version 3.4.2 (2017-09-28) and release update to GitHub.
 ---------------------------------------------------------------------------------
+Date   : 2018-05-08
+o RELEASE 1.0.2
+BUG FIXES
+- Corrected reference to R package "randomForestSRC".
+- Corrected missing code and export of `IRSF.news()` in NAMESPACE file.
+PACKAGE INSTALLATION
+- Updates in documentation files (DESCRIPTION, NEWS and README).
+- Built and tested under R version 3.5.0 (2018-04-23) and release update to GitHub.
+---------------------------------------------------------------------------------
