@@ -7,7 +7,8 @@ import("abind")
 import("parallel")
 importFrom("stats", as.formula, p.adjust, quantile, runif, sd)
 
-export("rsf.main", 
+export("IRSF.news",
+       "rsf.main", 
        "rsf.int", 
        "cph.main", 
        "cph.int")
