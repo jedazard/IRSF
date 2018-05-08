@@ -187,3 +187,35 @@ rsf.int.signif <- function(X,
    return(list("boot.obs"=int.mdms.obs, "boot.noise"=int.mdms.noise))
 }
 #==========================================================================================#
+
+
+
+#==========================================================================================#
+#===============#
+# Usage         :
+#===============#
+#                    .onAttach (libname, pkgname)
+#
+#===============#
+# Description   :
+#===============#
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
+#==========================================================================================#
+
+.onAttach <- function(libname, pkgname) {
+
+   SSver <- read.dcf(file=system.file("DESCRIPTION", package=pkgname), 
+                     fields="Version")
+   packageStartupMessage(paste(pkgname, " ", SSver, sep=""))
+   packageStartupMessage("Type IRSF.news() to see new features, changes, and bug fixes")
+   
+}
+#==========================================================================================#
