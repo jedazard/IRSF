@@ -85,7 +85,9 @@
 \keyword{Genetic Variations Interactions}
 
 \seealso{
-    Multicenter AIDS Cohort Study (MACS) websitea at \url{http://www.statepi.jhsph.edu/macs/macs.html}
+    \itemize{
+       \item Multicenter AIDS Cohort Study (MACS) websitea at \url{http://www.statepi.jhsph.edu/macs/macs.html}
+    }
 }
 
 \examples{

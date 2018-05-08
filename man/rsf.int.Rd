@@ -148,7 +148,7 @@
               "\emph{Random Survival Forests for R}.
               R News, 7(2), 25-31, (2007).
         \item Ishwaran, H. and Kogalur, U.B.
-              "\emph{Contributed R Package \code{\link[randomForestSRC:randomForestSRC-package]{randomForestSRC}}: Random Forests for Survival, Regression and Classification (RF-SRC)}"
+              "\emph{Contributed R Package \pkg{randomForestSRC}: Random Forests for Survival, Regression and Classification (RF-SRC)}"
               CRAN (2013).
     }
 }
@@ -169,7 +169,9 @@
 \keyword{Time-to-Event Analysis}
 
 \seealso{
-    \code{\link[randomForestSRC:randomForestSRC-package]{randomForestSRC}}
+    \itemize{
+       \item R package \pkg{randomForestSRC}
+    }
 }
 
 \examples{
