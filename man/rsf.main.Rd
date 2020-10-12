@@ -210,30 +210,31 @@
    X <- data.frame(stime, status, x)
 
    #===================================================
-   # Examples of parallel backend parametrization
+   # Examples of parallel backend parametrization 
    #===================================================
    if (require("parallel")) {
-      print("'parallel' is attached correctly \n")
+      cat("'parallel' is attached correctly \n")
    } else {
       stop("'parallel' must be attached first \n")
    }
-
    #===================================================
-   # Example #1 - Quad core PC
-   # Running WINDOWS with SOCKET communication
+   # Ex. #1 - Multicore PC
+   # Running WINDOWS
+   # SOCKET communication cluster
+   # Shared memory parallelization
    #===================================================
-   cpus <- detectCores(logical = TRUE)
+   cpus <- parallel::detectCores(logical = TRUE)
    conf <- list("spec" = rep("localhost", cpus),
                 "type" = "SOCKET",
                 "homo" = TRUE,
                 "verbose" = TRUE,
                 "outfile" = "")
-
    #===================================================
-   # Example #2 - Master node + 3 Worker nodes cluster
-   # Running LINUX with SOCKET communication
-   # All nodes equipped with identical setups of
-   # multicores (8 core CPUs per machine for a total of 32)
+   # Ex. #2 - Master node + 3 Worker nodes cluster
+   # All nodes equipped with identical setups of multicores 
+   # (8 core CPUs per machine for a total of 32)
+   # SOCKET communication cluster
+   # Distributed memory parallelization
    #===================================================
    masterhost <- Sys.getenv("HOSTNAME")
    slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
@@ -245,26 +246,24 @@
                 "homo" = TRUE,
                 "verbose" = TRUE,
                 "outfile" = "")
-
    #===================================================
-   # Example #3 - Multinode of multicore per node cluster
-   # Running LINUX with SLURM scheduler and MPI communication
-   # Below, variable 'cpus' is the total number
-   # of requested core CPUs, which is specified from
-   # within a SLURM script.
-   #===================================================
-   if (require("Rmpi")) {
-      print("'Rmpi' is attached correctly \n")
-   } else {
-      stop("'Rmpi' must be attached first \n")
-   }
+   # Ex. #3 - Enterprise Multinode Cluster w/ multicore/node  
+   # Running LINUX with SLURM scheduler
+   # MPI communication cluster
+   # Distributed memory parallelization
+   # Below, variable 'cpus' is the total number of requested 
+   # taks (threads/CPUs), which is specified from within a 
+   # SLURM script.
+   #==================================================
    cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
    conf <- list("spec" = cpus,
                 "type" = "MPI",
                 "homo" = TRUE,
                 "verbose" = TRUE,
                 "outfile" = "")
-
+   #===================================================
+   Minimal Depth of a Maximal Subtree (MDMS)
+   #===================================================
    main.mdms <- rsf.main(X=X,
                          ntree=1000,
                          method="mdms",

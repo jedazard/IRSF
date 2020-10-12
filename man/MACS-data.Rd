@@ -15,7 +15,9 @@
   such as time to HIV change of tropism or time to AIDS diagnosis (See Dazard et al. (2017) for additional descriptions of the dataset and materials).
 }
 
-\usage{MACS}
+\usage{
+    data("MACS", package="IRSF")
+}
 
 \format{
   The dataset consists of a \code{numeric} \code{data.frame} containing \eqn{n=50} complete observations (samples) 
