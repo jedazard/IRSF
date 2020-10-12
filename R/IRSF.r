@@ -1,6 +1,6 @@
 #==========================================================================================#
 # Ranking of individual and noise variables main effects 
-# by univariate minimal depth of a maximal subtree (MDMS)
+# by univariate Minimal Depth of a Maximal Subtree (MDMS)
 #==========================================================================================#
 rsf.main <- function(X,
                      ntree = 1000,
@@ -13,7 +13,7 @@ rsf.main <- function(X,
                      conf = NULL,
                      verbose = TRUE,
                      seed = NULL) {
-
+   
    if (!parallel) {
       if (is.null(seed)) {
          digits <- getOption("digits")
@@ -97,7 +97,7 @@ rsf.main <- function(X,
    }
    mat.ranks <- mat.ranks[ord,]
    return(mat.ranks)
-
+   
 }
 #==========================================================================================#
 
@@ -118,7 +118,7 @@ rsf.int <- function(X,
                     conf = NULL,
                     verbose = TRUE,
                     seed = NULL) {
-
+   
    p <- ncol(X) - 2
    if (!parallel) {
       if (is.null(seed)) {
@@ -175,8 +175,8 @@ rsf.int <- function(X,
          rsf.obs.boot <- array(data=NA, dim=c(dim(rsf.cl[[1]]$boot.obs)[1], dim(rsf.cl[[1]]$boot.obs)[2], 0))
          rsf.noise.boot <- array(data=NA, dim=c(dim(rsf.cl[[1]]$boot.noise)[1], dim(rsf.cl[[1]]$boot.noise)[2], 0))
          for (b in 1:cpus) {
-            rsf.obs.boot <-  abind(rsf.obs.boot, rsf.cl[[b]]$boot.obs)
-            rsf.noise.boot <-  abind(rsf.noise.boot, rsf.cl[[b]]$boot.noise)
+            rsf.obs.boot <-  abind::abind(rsf.obs.boot, rsf.cl[[b]]$boot.obs)
+            rsf.noise.boot <-  abind::abind(rsf.noise.boot, rsf.cl[[b]]$boot.noise)
          }
       } else {
          stop("Unmatched method \n")
@@ -230,7 +230,7 @@ rsf.int <- function(X,
    }
    mat.int <- mat.int[ord,]
    return(mat.int)
-
+   
 }
 #==========================================================================================#
 
@@ -241,15 +241,15 @@ rsf.int <- function(X,
 # Computes p-values of significance of regression coefficients of main effects in a Cox-PH model
 #==========================================================================================#
 cph.main <- function (X, main.term) {
-
+   
    p <- ncol(X) - 2
-   fmla.main <- as.formula(paste("Surv(time=", colnames(X)[1], ", event=", colnames(X)[2], ", type=\"right\") ~ .", sep=""))
-
+   fmla.main <- as.formula(paste("survival::Surv(time=", colnames(X)[1], ", event=", colnames(X)[2], ", type=\"right\") ~ .", sep=""))
+   
    P.cph.main <- numeric(p)
    names(P.cph.main) <- main.term
    for (j in 1:p) {
       Z <- X[,c(colnames(X)[1], colnames(X)[2], main.term[j])]
-      coxfit <- tryCatch({coxph(fmla.main, data=Z, model=T, x=T, y=T)}, error=function(w){NULL}, warning=function(w){NULL})
+      coxfit <- tryCatch({survival::coxph(fmla.main, data=Z, model=T, x=T, y=T)}, error=function(w){NULL}, warning=function(w){NULL})
       if (is.null(coxfit)) {
          P.cph.main[j] <- NA
       } else {
@@ -260,7 +260,7 @@ cph.main <- function (X, main.term) {
    nna <- !is.na(P.cph.main)
    P.cph.bh.main[nna] <- p.adjust(p=P.cph.main[nna], method="BH")
    P.cph.bh.main[!nna] <- NA
-
+   
    return(list("raw"=P.cph.main, "fdr"=P.cph.bh.main))
 }
 #==========================================================================================#
@@ -272,16 +272,16 @@ cph.main <- function (X, main.term) {
 # Computes p-values of significance of regression coefficients of pairwise interaction effects in a Cox-PH model
 #==========================================================================================#
 cph.int <- function (X, int.term) {
-
+   
    p <- ncol(X) - 2
    int.term.list <- strsplit(x=int.term, split=":")
-   fmla.int <- as.formula(paste("Surv(time=", colnames(X)[1], ", event=", colnames(X)[2], ", type=\"right\") ~ . + (.)^2", sep=""))
-
+   fmla.int <- as.formula(paste("survival::Surv(time=", colnames(X)[1], ", event=", colnames(X)[2], ", type=\"right\") ~ . + (.)^2", sep=""))
+   
    P.cph.int <- numeric(p*(p-1)/2)
    names(P.cph.int) <- int.term
    for (j in 1:(p*(p-1)/2)) {
       Z <- X[,c(colnames(X)[1], colnames(X)[2], int.term.list[[j]])]
-      coxfit <- tryCatch({coxph(fmla.int, data=Z, model=T, x=T, y=T)}, error=function(w){NULL}, warning=function(w){NULL})
+      coxfit <- tryCatch({survival::coxph(fmla.int, data=Z, model=T, x=T, y=T)}, error=function(w){NULL}, warning=function(w){NULL})
       if (is.null(coxfit)) {
          P.cph.int[j] <- NA
       } else {
@@ -292,7 +292,7 @@ cph.int <- function (X, int.term) {
    nna <- !is.na(P.cph.int)
    P.cph.bh.int[nna] <- p.adjust(p=P.cph.int[nna], method="BH")
    P.cph.bh.int[!nna] <- NA
-
+   
    return(list("raw"=P.cph.int, "fdr"=P.cph.bh.int))
 }
 #==========================================================================================#
@@ -303,7 +303,7 @@ cph.int <- function (X, int.term) {
 # Function to display the log file NEWS of updates of the IRSF package.
 #==========================================================================================#
 IRSF.news <- function(...) {
-
+   
    newsfile <- file.path(system.file(package="IRSF"), "NEWS")
    file.show(newsfile)
    
