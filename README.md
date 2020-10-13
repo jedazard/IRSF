@@ -42,10 +42,10 @@ IRSF (>= 1.0.3) requires R-3.5.0 (2018-04-23). It was built and tested under R v
 Installation has been tested on Windows, Linux, OSX and Solaris platforms. 
 
 See Travis CI build result:
-[![Build Status](https://travis-ci.org/jedazard/IRSF.png?branch=master)](https://travis-ci.org/jedazard/IRSF)
+[![Build Status](https://travis-ci.com/jedazard/IRSF.svg)](https://travis-ci.com/jedazard/IRSF)
 
 See CRAN checks:
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/IRSF)](https://cran.r-project.org/web/checks/check_results_IRSF.html).
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/IRSF)](https://cran.r-project.org/web/checks/check_results_IRSF.html)
 
 
 ================
