@@ -2,13 +2,13 @@ Package: IRSF
 Type: Package
 Title: Interaction Random Survival Forest
 Version: 1.0.3
-Date: 2020-10-12
+Date: 2020-10-14
 Authors@R: person("Jean-Eudes", "Dazard",
                    role = c("aut", "cre"),
                    email = "jean-eudes.dazard@case.edu")
 Author: Jean-Eudes Dazard [aut, cre]
 Maintainer: Jean-Eudes Dazard <jean-eudes.dazard@case.edu>
-Description: Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes. The current version is a development release. It contains R codes in folders "/R" and "/inst/doc" for the analyses and the generation of the results shown in manuscript (Dazard et al., 2017), respectively. Codes contain randomization, interaction modeling and prediction subroutines.
+Description: This package builds Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes. The current version is a development release. It contains additional R codes in folder "/inst/doc" for the analyses and generation of results shown in manuscript (Dazard et al. (2017) <doi:10.1515/sagmb-2017-0038>). Codes contain randomization, interaction modeling and prediction subroutines.
 Depends: R (>= 3.5.0)
 Imports: parallel, survival, randomForestSRC, abind
 NeedsCompilation: no
