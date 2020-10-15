@@ -1,10 +1,9 @@
 exportPattern("^[[:alpha:]]+")
 
+import("parallel")
 import("survival")
 import("randomForestSRC")
 import("abind")
-
-import("parallel")
 importFrom("stats", as.formula, p.adjust, quantile, runif, sd)
 
 export("IRSF.news",
