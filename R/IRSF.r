@@ -1,7 +1,36 @@
 #==========================================================================================#
-# Ranking of individual and noise variables main effects 
-# by univariate Minimal Depth of a Maximal Subtree (MDMS)
+#===============#
+# Usage         :
+#===============#
+#                    rsf.main(X,
+#                             ntree = 1000,
+#                             method = "mdms",
+#                             splitrule = "logrank",
+#                             importance = "random",
+#                             B,
+#                             ci = 90,
+#                             parallel = FALSE,
+#                             conf = NULL,
+#                             verbose = TRUE,
+#                             seed = NULL)
+#
+#===============#
+# Description   :
+#===============#
+#                    Ranking of individual and noise variables main effects by
+#                    univariate variable importance (VIMP), or
+#                    univariate minimal depth of a maximal subtree (MDMS).
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
 #==========================================================================================#
+
 rsf.main <- function(X,
                      ntree = 1000,
                      method = "mdms",
@@ -104,9 +133,38 @@ rsf.main <- function(X,
 
 
 #==========================================================================================#
-# Ranking of pairwise interactions between individual or noise variables 
-# by bivariate interaction Minimal Depth of a Maximal Subtree (IMDMS)
+#===============#
+# Usage         :
+#===============#
+#                    rsf.int(X,
+#                            ntree = 1000,
+#                            method = "imdms",
+#                            splitrule = "logrank",
+#                            importance = "random",
+#                            B,
+#                            ci = 90,
+#                            parallel = FALSE,
+#                            conf = NULL,
+#                            verbose = TRUE,
+#                            seed = NULL)
+#
+#===============#
+# Description   :
+#===============#
+#                    Ranking of pairwise interactions between individual or noise variables by
+#                    bivariate interaction variable importance (IVIMP), or
+#                    bivariate interaction minimal depth of a maximal subtree (IMDMS).
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
 #==========================================================================================#
+
 rsf.int <- function(X,
                     ntree = 1000,
                     method = "imdms",
@@ -237,9 +295,28 @@ rsf.int <- function(X,
 
 
 #==========================================================================================#
-# Fits a Proportional Hazards Time-To-Event Regression Model saturated with first order terms
-# Computes p-values of significance of regression coefficients of main effects in a Cox-PH model
+#===============#
+# Usage         :
+#===============#
+#                    cph.main(X, 
+#                             main.term)
+#
+#===============#
+# Description   :
+#===============#
+#                    Fits a Proportional Hazards Time-To-Event Regression Model saturated with first order terms.
+#                    Computes p-values of significance of regression coefficients of main effects in a Cox-PH model.
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
 #==========================================================================================#
+
 cph.main <- function (X, main.term) {
    
    p <- ncol(X) - 2
@@ -268,9 +345,28 @@ cph.main <- function (X, main.term) {
 
 
 #==========================================================================================#
-# Fits a Proportional Hazards Time-To-Event Regression Model saturated with first and second order terms
-# Computes p-values of significance of regression coefficients of pairwise interaction effects in a Cox-PH model
+#===============#
+# Usage         :
+#===============#
+#                    cph.int(X, 
+#                            int.term)
+#
+#===============#
+# Description   :
+#===============#
+#                    Fits a Proportional Hazards Time-To-Event Regression Model saturated with first and second order terms.
+#                    Computes p-values of significance of regression coefficients of pairwise interaction effects in a Cox-PH model.
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
 #==========================================================================================#
+
 cph.int <- function (X, int.term) {
    
    p <- ncol(X) - 2
@@ -300,8 +396,26 @@ cph.int <- function (X, int.term) {
 
 
 #==========================================================================================#
-# Function to display the log file NEWS of updates of the IRSF package.
+#===============#
+# Usage         :
+#===============#
+#                    IRSF.news()
+#
+#===============#
+# Description   :
+#===============#
+#                    Function to display the log file NEWS of updates of the IRSF package.
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
 #==========================================================================================#
+
 IRSF.news <- function(...) {
    
    newsfile <- file.path(system.file(package="IRSF"), "NEWS")

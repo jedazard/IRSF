@@ -1,7 +1,33 @@
 #==========================================================================================#
-# Subroutine for ranking of individual and noise variables main effects 
-# by univariate Minimal Depth of a Maximal Subtree (MDMS)
+#===============#
+# Usage         :
+#===============#
+#                    rsf.main.signif(X,
+#                                    ntree,
+#                                    method,
+#                                    splitrule,
+#                                    importance,
+#                                    B,
+#                                    verbose,
+#                                    seed)
+#
+#===============#
+# Description   :
+#===============#
+#                    Subroutine for ranking of individual and noise variables main effects by
+#                    univariate variable importance (VIMP), or
+#                    univariate minimal depth of a maximal subtree (MDMS).
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
 #==========================================================================================#
+
 rsf.main.signif <- function(X,
                             ntree,
                             method,
@@ -28,7 +54,7 @@ rsf.main.signif <- function(X,
       Z.obs.bo <- Z.obs[bo,]
       Z.noise.bo <- Z.noise[bo,]
       
-      rsf.obs.bo <- randomForestSRC::rfsrc(formula=survival::Surv(time=time, event=event, type="right") ~ .,
+      rsf.obs.bo <- randomForestSRC::rfsrc(formula=Surv(time=time, event=event, type="right") ~ .,
                                            data=Z.obs.bo,
                                            ntree=ntree,
                                            bootstrap="by.root",
@@ -48,7 +74,7 @@ rsf.main.signif <- function(X,
                                            tree.err=TRUE,
                                            seed=seed[b])
       
-      rsf.noise.bo <- randomForestSRC::rfsrc(formula=survival::Surv(time=time, event=event, type="right") ~ .,
+      rsf.noise.bo <- randomForestSRC::rfsrc(formula=Surv(time=time, event=event, type="right") ~ .,
                                              data=Z.noise.bo,
                                              ntree=ntree,
                                              bootstrap="by.root",
@@ -90,9 +116,35 @@ rsf.main.signif <- function(X,
 
 
 #==========================================================================================#
-# Subroutine for ranking of pairwise interactions between individual or noise variables 
-# by bivariate interaction Minimal Depth of a Maximal Subtree (IMDMS)
+#===============#
+# Usage         :
+#===============#
+#                    rsf.int.signif(X,
+#                                   ntree,
+#                                   method,
+#                                   splitrule,
+#                                   importance,
+#                                   B,
+#                                   verbose,
+#                                   seed)
+#
+#===============#
+# Description   :
+#===============#
+#                    Subroutine for ranking of pairwise interactions between individual or noise variables by
+#                    bivariate interaction variable importance (IVIMP), or
+#                    bivariate interaction minimal depth of a maximal subtree (IMDMS)
+#
+#===============#
+# Arguments     :
+#===============#
+#
+#===============#
+# Values        :
+#===============#
+#
 #==========================================================================================#
+
 rsf.int.signif <- function(X,
                            ntree,
                            method,
@@ -119,7 +171,7 @@ rsf.int.signif <- function(X,
       Z.obs.bo <- Z.obs[bo,]
       Z.noise.bo <- Z.noise[bo,]
       
-      rsf.obs.bo <- randomForestSRC::rfsrc(formula=survival::Surv(time=time, event=event, type="right") ~ .,
+      rsf.obs.bo <- randomForestSRC::rfsrc(formula=Surv(time=time, event=event, type="right") ~ .,
                                            data=Z.obs.bo,
                                            ntree=ntree,
                                            bootstrap="by.root",
@@ -139,7 +191,7 @@ rsf.int.signif <- function(X,
                                            tree.err=TRUE,
                                            seed=seed[b])
       
-      rsf.noise.bo <- randomForestSRC::rfsrc(formula=survival::Surv(time=time, event=event, type="right") ~ .,
+      rsf.noise.bo <- randomForestSRC::rfsrc(formula=Surv(time=time, event=event, type="right") ~ .,
                                              data=Z.noise.bo,
                                              ntree=ntree,
                                              bootstrap="by.root",
