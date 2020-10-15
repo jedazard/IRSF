@@ -2,35 +2,18 @@
 # Correlation of Genomic Variants to Time-To-Event
 ###################################################################################################################################
 
-#==========================================================================================#
-# Loading Additional Libraries for simulations, validations, and publication of the manuscript figures
-#==========================================================================================#
-library("parallel")
-library("survival")
-library("randomForestSRC")
-library("abind")
+#==========================================================================================
+# Loading IRSF library for simulations, validations, and publication of the manuscript figures
+#==========================================================================================
 library("IRSF")
 
+#==========================================================================================
+# Loading additional libraries
+#==========================================================================================
 library("ggRandomForests")
 library("NADA")
 library("MASS")
 library("RColorBrewer")
-
-#==========================================================================================#
-# Loading Cluster Libraries (for MPI-configured cluster)
-#==========================================================================================#
-if (.Platform$OS.type == "unix") {
-     if (!is.loaded("Rmpi")) {
-        library("Rmpi")
-    }
-}
-
-#==========================================================================================
-# Erasing the random seed if it exists and set it up to the default one
-#==========================================================================================
-if (exists(".Random.seed")) rm(.Random.seed)
-RNGkind(kind="L'Ecuyer-CMRG")
-
 
 
 ##########################################################################################################################################
@@ -38,54 +21,69 @@ RNGkind(kind="L'Ecuyer-CMRG")
 ##########################################################################################################################################
 
 #=========================================================================================#
-# Retrieving argument "type" passed from the command line
-#=========================================================================================#
-argv <- commandArgs(trailingOnly=TRUE)
-
-#=========================================================================================#
 # Cluster configuration
 #=========================================================================================#
+if (require("parallel")) {
+  print("'parallel' is attached correctly \n")
+} else {
+  stop("'parallel' must be attached first \n")
+}
+
 if (.Platform$OS.type == "windows") {
-   cpus <- detectCores(logical=TRUE)
-   conf <- list("spec"=rep("localhost", cpus),
-                "type"="SOCKET",
-                "homo"=TRUE,
-                "verbose"=TRUE,
-                "outfile"=paste(getwd(), "/output_SOCK.txt", sep=""))
+  # Windows OS
+  cpus <- detectCores(logical = TRUE)
+  conf <- list("spec"=rep("localhost", cpus),
+               "type"="SOCKET",
+               "homo"=TRUE,
+               "verbose"=TRUE,
+               "outfile"=file.path(getwd(), "output_SOCK.txt", fsep=.Platform$file.sep))
 } else if (.Platform$OS.type == "unix") {
-   cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
-   type <- as.character(argv[1])
-   if (type == "SOCKET") {
+  # Linux or Mac OS
+  argv <- commandArgs(trailingOnly=TRUE)  
+  if (is.empty(argv)) {
+    # Mac OS : No argument "argv" in this case  
+    cpus <- detectCores(logical = TRUE)
+    conf <- list("spec"=rep("localhost", cpus),
+                 "type"="SOCKET",
+                 "homo"=TRUE,
+                 "verbose"=TRUE,
+                 "outfile"=file.path(getwd(), "output_SOCK.txt", fsep=.Platform$file.sep))
+  } else {
+    # Linux OS : Retrieving arguments "type" and "cpus" from the SLURM script
+    type <- as.character(argv[1])
+    cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
+    if (type == "SOCKET") {
       conf <- list("spec"=rep("localhost", cpus),
                    "type"="SOCKET",
                    "homo"=TRUE,
                    "verbose"=TRUE,
-                   "outfile"=paste(getwd(), "/output_SOCK.txt", sep=""))
-   } else if (type == "MPI") {
+                   "outfile"=file.path(getwd(), "output_SOCK.txt", fsep=.Platform$file.sep))
+    } else if (type == "MPI") {
       if (require("Rmpi")) {
-         print("Rmpi is loaded correctly \n")
+          print("Rmpi is loaded correctly \n")
       } else {
-         stop("Rmpi must be installed first \n")
+          stop("Rmpi must be installed first to use MPI\n")
       }
       conf <- list("spec"=cpus,
                    "type"="MPI",
                    "homo"=TRUE,
                    "verbose"=TRUE,
-                   "outfile"=paste(getwd(), "/output_MPI.txt", sep=""))
-   } else {
-      stop("Unrecognized cluster type\n")
-   }
+                   "outfile"=file.path(getwd(), "output_MPI.txt", fsep=.Platform$file.sep))
+    } else {
+      stop("Unrecognized cluster type: you must specify a \"SOCKET\" or \"MPI\" cluster type\n")
+    }
+  }
 } else {
-   stop("Unrecognized platform\n")
+  stop("Unrecognized platform: you must specify a \"windows\" or \"unix\" platform type\n")
 }
 
 cat("Cluster configuration:\n")
 print(conf)
 
 
-
 ##########################################################################################################################################
 # Simulations Study
+# Default parameters were used for all main functions.
 ##########################################################################################################################################
 
 #==========================================================================================#
