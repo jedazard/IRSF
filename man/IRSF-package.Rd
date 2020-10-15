@@ -9,10 +9,13 @@
 }
 
 \description{
-    This package builds Ensemble Survival Tree Models to Reveal Variable Interactions in Association with Time-to-Events Outcomes. 
-    The current version is a development release. It contains additional R codes in folder "/inst/doc" for the analyses 
-    and generation of results shown in manuscript (Dazard et al. (2017) <doi:10.1515/sagmb-2017-0038>). 
-    Codes contain randomization, interaction modeling and prediction subroutines.
+    Builds ensemble survival tree models to reveal variable interactions when the response is a time-to-events outcome.
+    The current version is a development release. It contains additional R codes in folder "/inst/doc" for the analysis 
+    and generation of results shown in manuscript (Dazard et al., 2017). Codes contain randomization, interaction modeling, 
+    and prediction subroutines to be used in addition to the following R packages: 
+    \pkg{survival} for Kaplan-Meier and Cox regression modeling, \pkg{randomForestSRC} for RSF modeling 
+    (Ishwaran and Kogalur, 2013, 2007), and optionally \pkg{ggRandomForests} (Ehrlinger, 2014) for Random Forest 
+    exploration/visualization. 
 }
 
 \details{
@@ -41,15 +44,18 @@
 
 \references{
     \itemize{
-        \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A.
+        \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. (2017).
               "\emph{Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting}"
-              Statistical Applications in Genetics and Molecular Biology, DOI: 10.1515/sagmb-2017-0038 (2017).
-        \item Ishwaran, H. and Kogalur, U.B.
-              "\emph{Random Survival Forests for R}.
-              R News, 7(2), 25-31, (2007).
-        \item Ishwaran, H. and Kogalur, U.B.
+              Statistical Applications in Genetics and Molecular Biology, 17(1):20170038.
+        \item Ishwaran, H. and Kogalur, U.B. (2007).
+              "\emph{Random Survival Forests for R}".
+              R News, 7(2):25-31.
+        \item Ishwaran, H. and Kogalur, U.B. (2013).
               "\emph{Contributed R Package \pkg{randomForestSRC}: Random Forests for Survival, Regression and Classification (RF-SRC)}"
-              CRAN (2013).
+              CRAN.
+        \item Ehrlinger, J. (2014).
+              "\emph{Contributed R Package \pkg{ggRandomForests}: Visually Exploring Random Forests}"
+              CRAN.
     }
 }
 

@@ -141,15 +141,15 @@
 
 \references{
     \itemize{
-        \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A.
+        \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. (2017).
               "\emph{Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting}"
-              Statistical Applications in Genetics and Molecular Biology, DOI: 10.1515/sagmb-2017-0038 (2017).
-        \item Ishwaran, H. and Kogalur, U.B.
-              "\emph{Random Survival Forests for R}.
-              R News, 7(2), 25-31, (2007).
-        \item Ishwaran, H. and Kogalur, U.B.
+              Statistical Applications in Genetics and Molecular Biology, 17(1):20170038.
+        \item Ishwaran, H. and Kogalur, U.B. (2007).
+              "\emph{Random Survival Forests for R}".
+              R News, 7(2):25-31.
+        \item Ishwaran, H. and Kogalur, U.B. (2013).
               "\emph{Contributed R Package \pkg{randomForestSRC}: Random Forests for Survival, Regression and Classification (RF-SRC)}"
-              CRAN (2013).
+              CRAN.
     }
 }
 
@@ -175,105 +175,164 @@
 }
 
 \examples{
-   \dontrun{
-   #===================================================
-   # Loading the library and its dependencies
-   #===================================================
-   library("IRSF")
+#===================================================
+# Loading the library and its dependencies
+#===================================================
+library("IRSF")
 
-   #==========================================================================================#
-   # Continuous case:
-   # All variables xj, j in {1,...,p}, are iid from a multivariate uniform distribution
-   # with parmeters  a=1, b=5, i.e. on [1, 5].
-   # rho = 0.50
-   # Regression model: X1 + X5
-   #==========================================================================================#
-   seed <- 1234567
-   set.seed(seed)
-   n <- 200
-   p <- 5
-   x <- matrix(data=runif(n=n*p, min=1, max=5),
-               nrow=n, ncol=p, byrow=FALSE,
-               dimnames=list(1:n, paste("X", 1:p, sep="")))
-   beta <- c(1,0,0,0,1)
-   covar <- x
-   eta <- covar %*% beta                     # regression function
+\dontrun{
+    #===================================================
+    # IRSF package news
+    #===================================================
+    IRSF.news()
 
-   seed <- 1234567
-   set.seed(seed)
-   lambda0 <- 1
-   lambda <- lambda0 * exp(eta - mean(eta))  # hazards function
-   tt <- rexp(n=n, rate=lambda)              # true (uncensored) event times
-   tc <- runif(n=n, min=0, max=1.50)         # true (censored) event times
-   stime <- pmin(tt, tc)                     # observed event times
-   status <- 1 * (tt <= tc)                  # observed event indicator
-   X <- data.frame(stime, status, x)
+    #================================================
+    # MVR package citation
+    #================================================
+    citation("IRSF")
 
-   #===================================================
-   # Examples of parallel backend parametrization 
-   #===================================================
-   if (require("parallel")) {
-      cat("'parallel' is attached correctly \n")
-   } else {
-      stop("'parallel' must be attached first \n")
-   }
-   #===================================================
-   # Ex. #1 - Multicore PC
-   # Running WINDOWS
-   # SOCKET communication cluster
-   # Shared memory parallelization
-   #===================================================
-   cpus <- parallel::detectCores(logical = TRUE)
-   conf <- list("spec" = rep("localhost", cpus),
-                "type" = "SOCKET",
-                "homo" = TRUE,
-                "verbose" = TRUE,
-                "outfile" = "")
-   #===================================================
-   # Ex. #2 - Master node + 3 Worker nodes cluster
-   # All nodes equipped with identical setups of multicores 
-   # (8 core CPUs per machine for a total of 32)
-   # SOCKET communication cluster
-   # Distributed memory parallelization
-   #===================================================
-   masterhost <- Sys.getenv("HOSTNAME")
-   slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
-   nodes <- length(slavehosts) + 1
-   cpus <- 8
-   conf <- list("spec" = c(rep(masterhost, cpus),
-                           rep(slavehosts, cpus)),
-                "type" = "SOCKET",
-                "homo" = TRUE,
-                "verbose" = TRUE,
-                "outfile" = "")
-   #===================================================
-   # Ex. #3 - Enterprise Multinode Cluster w/ multicore/node  
-   # Running LINUX with SLURM scheduler
-   # MPI communication cluster
-   # Distributed memory parallelization
-   # Below, variable 'cpus' is the total number of requested 
-   # taks (threads/CPUs), which is specified from within a 
-   # SLURM script.
-   #==================================================
-   cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
-   conf <- list("spec" = cpus,
-                "type" = "MPI",
-                "homo" = TRUE,
-                "verbose" = TRUE,
-                "outfile" = "")
-   #===================================================
-   Minimal Depth of a Maximal Subtree (MDMS)
-   #===================================================
-   main.mdms <- rsf.main(X=X,
-                         ntree=1000,
-                         method="mdms",
-                         splitrule="logrank",
-                         importance="random",
-                         B=1000,
-                         ci=90,
-                         parallel=FALSE,
-                         conf=NULL,
-                         verbose=TRUE,
-                         seed=seed)
-   }
+    #===================================================
+    # Loading of the Synthetic and Real datasets
+    # Use help for descriptions
+    #===================================================
+    data("MACS", package="IRSF")
+    ?MACS
+
+    head(MACS)
+
+    #===================================================
+    # Synthetic dataset
+    # Continuous case:
+    # All variables xj, j in {1,...,p}, are iid 
+    # from a multivariate uniform distribution
+    # with parmeters  a=1, b=5, i.e. on [1, 5].
+    # rho = 0.50
+    # Regression model: X1 + X2 + X1X2
+    #===================================================
+    seed <- 1234567
+    set.seed(seed)
+    n <- 200
+    p <- 5
+    x <- matrix(data=runif(n=n*p, min=1, max=5),
+                nrow=n, ncol=p, byrow=FALSE,
+                dimnames=list(1:n, paste("X", 1:p, sep="")))
+
+    beta <- c(rep(1,2), rep(0,p-2), 1)
+    covar <- cbind(x, "X1X2"=x[,1]*x[,2])
+    eta <- covar %*% beta                     # regression function
+
+    seed <- 1234567
+    set.seed(seed)
+    lambda0 <- 1
+    lambda <- lambda0 * exp(eta - mean(eta))  # hazards function
+    tt <- rexp(n=n, rate=lambda)              # true (uncensored) event times
+    tc <- runif(n=n, min=0, max=3.9)          # true (censored) event times
+    stime <- pmin(tt, tc)                     # observed event times
+    status <- 1 * (tt <= tc)                  # observed event indicator
+    X <- data.frame(stime, status, x)
+        
+    #===================================================
+    # Synthetic dataset
+    # Ranking of individual and noise variables by univariate 
+    # Minimal Depth of a Maximal Subtree (MDMS)
+    # Serial mode
+    #===================================================
+    X.main.mdms <- rsf.main(X=X,
+                            ntree=1000,
+                            method="mdms",
+                            splitrule="logrank",
+                            importance="random",
+                            B=1000,
+                            ci=90,
+                            parallel=FALSE,
+                            conf=NULL,
+                            verbose=TRUE,
+                            seed=seed)
+
+    #===================================================
+    # Examples of parallel backend parametrization 
+    #===================================================
+    if (require("parallel")) {
+       cat("'parallel' is attached correctly \n")
+    } else {
+       stop("'parallel' must be attached first \n")
+    }
+    #===================================================
+    # Ex. #1 - Multicore PC
+    # Running WINDOWS
+    # SOCKET communication cluster
+    # Shared memory parallelization
+    #===================================================
+    cpus <- parallel::detectCores(logical = TRUE)
+    conf <- list("spec" = rep("localhost", cpus),
+                 "type" = "SOCKET",
+                 "homo" = TRUE,
+                 "verbose" = TRUE,
+                 "outfile" = "")
+    #===================================================
+    # Ex. #2 - Master node + 3 Worker nodes cluster
+    # All nodes equipped with identical setups of multicores 
+    # (8 core CPUs per machine for a total of 32)
+    # SOCKET communication cluster
+    # Distributed memory parallelization
+    #===================================================
+    masterhost <- Sys.getenv("HOSTNAME")
+    slavehosts <- c("compute-0-0", "compute-0-1", "compute-0-2")
+    nodes <- length(slavehosts) + 1
+    cpus <- 8
+    conf <- list("spec" = c(rep(masterhost, cpus),
+                            rep(slavehosts, cpus)),
+                 "type" = "SOCKET",
+                 "homo" = TRUE,
+                 "verbose" = TRUE,
+                 "outfile" = "")
+    #===================================================
+    # Ex. #3 - Enterprise Multinode Cluster w/ multicore/node  
+    # Running LINUX with SLURM scheduler
+    # MPI communication cluster
+    # Distributed memory parallelization
+    # Below, variable 'cpus' is the total number of requested 
+    # taks (threads/CPUs), which is specified from within a 
+    # SLURM script.
+    #==================================================
+    if (require("Rmpi")) {
+        print("Rmpi is loaded correctly \n")
+    } else {
+        stop("Rmpi must be installed first to use MPI\n")
+    }
+    cpus <- as.numeric(Sys.getenv("SLURM_NTASKS"))
+    conf <- list("spec" = cpus,
+                 "type" = "MPI",
+                 "homo" = TRUE,
+                 "verbose" = TRUE,
+                 "outfile" = "")
+
+    #===================================================
+    # Real dataset
+    #===================================================
+    seed <- 1234567
+    data("MACS", package="IRSF")
+
+    X <- MACS[,c("TTX","EventX","Race","Group3",
+                 "DEFB.CNV3","CCR2.SNP","CCR5.SNP2",
+                 "CCR5.ORF","CXCL12.SNP2")]
+
+    #===================================================
+    # Real dataset
+    # Ranking of individual and noise variables by univariate 
+    # Minimal Depth of a Maximal Subtree (MDMS)
+    # Parallel mode
+    #===================================================
+    MACS.main.mdms <- rsf.main(X=X,
+                               ntree=1000, 
+                               method="mdms", 
+                               splitrule="logrank", 
+                               importance="random", 
+                               B=1000, 
+                               ci=80,
+                               parallel=TRUE, 
+                               conf=conf, 
+                               verbose=TRUE, 
+                               seed=seed)
+    }
 }

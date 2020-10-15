@@ -28,15 +28,15 @@
 
 \references{
     \itemize{
-        \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A.
+        \item Dazard J-E., Ishwaran H., Mehlotra R.K., Weinberg A. and Zimmerman P.A. (2017).
               "\emph{Ensemble Survival Tree Models to Reveal Pairwise Interactions of Variables with Time-to-Events Outcomes in Low-Dimensional Setting}"
-              Statistical Applications in Genetics and Molecular Biology, DOI: 10.1515/sagmb-2017-0038 (2017).
-        \item Ishwaran, H. and Kogalur, U.B.
-              "\emph{Random Survival Forests for R}.
-              R News, 7(2), 25-31, (2007).
-        \item Ishwaran, H. and Kogalur, U.B.
+              Statistical Applications in Genetics and Molecular Biology, 17(1):20170038.
+        \item Ishwaran, H. and Kogalur, U.B. (2007).
+              "\emph{Random Survival Forests for R}".
+              R News, 7(2):25-31.
+        \item Ishwaran, H. and Kogalur, U.B. (2013).
               "\emph{Contributed R Package \pkg{randomForestSRC}: Random Forests for Survival, Regression and Classification (RF-SRC)}"
-              CRAN (2013).
+              CRAN.
     }
 }
 
