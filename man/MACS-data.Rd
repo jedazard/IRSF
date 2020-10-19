@@ -91,7 +91,7 @@
 
 \seealso{
     \itemize{
-       \item Multicenter AIDS Cohort Study (MACS) websitea at \url{http://www.statepi.jhsph.edu/macs/macs.html}
+       \item Multicenter AIDS Cohort Study (MACS) websitea at \url{https://statepi.jhsph.edu/macs/macs.html}
     }
 }
 
