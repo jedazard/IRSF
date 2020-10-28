@@ -137,11 +137,30 @@ library("IRSF")
 
     #===================================================
     # Synthetic dataset
+    # Ranking of pairwise interactions between individual 
+    # or noise variables by bivariate 
+    # Interaction Minimal Depth of a Maximal Subtree (IMDMS)
+    # Serial mode
+    #===================================================
+    X.int.mdms <- rsf.int(X=X,
+                          ntree=1000,
+                          method="imdms",
+                          splitrule="logrank",
+                          importance="random",
+                          B=1000,
+                          ci=90,
+                          parallel=FALSE,
+                          conf=NULL,
+                          verbose=FALSE,
+                          seed=seed)
+                          
+    #===================================================
+    # Synthetic dataset
     # Proportional Hazards Time-To-Event Regression Model 
     # saturated with first and second order terms.
     #===================================================
     X.int.cph <- cph.int(X=X, 
-                         int.term=rownames(int.mdms))
+                         int.term=rownames(X.int.mdms))
                          
     #===================================================
     # Real dataset
@@ -155,11 +174,32 @@ library("IRSF")
 
     #===================================================
     # Real dataset
+    # Ranking of pairwise interactions between individual 
+    # or noise variables by bivariate 
+    # Interaction Minimal Depth of a Maximal Subtree (IMDMS)
+    # Entries [i][j] indicate the normalized minimal depth 
+    # of a variable [j] w.r.t. the maximal subtree for variable [i]
+    # (normalized w.r.t. the size of [i]'s maximal subtree).
+    #===================================================
+    MACS.int.mdms <- rsf.int(X=X,
+                             ntree=1000, 
+                             method="imdms", 
+                             splitrule="logrank", 
+                             importance="random", 
+                             B=1000, 
+                             ci=80,
+                             parallel=TRUE, 
+                             conf=conf, 
+                             verbose=TRUE, 
+                             seed=seed)
+                             
+    #===================================================
+    # Real dataset
     # Proportional Hazards Time-To-Event Regression Model 
     # saturated with first and second order terms.
     #===================================================
     MACS.int.cph <- cph.int(X=X, 
-                            int.term=rownames(int.mdms))
+                            int.term=rownames(MACS.int.mdms))
                          
     }
 }

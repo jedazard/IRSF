@@ -137,11 +137,29 @@ library("IRSF")
                     
     #===================================================
     # Synthetic dataset
+    # Ranking of individual and noise variables by univariate 
+    # Minimal Depth of a Maximal Subtree (MDMS)
+    # Serial mode
+    #===================================================
+    X.main.mdms <- rsf.main(X=X,
+                            ntree=1000,
+                            method="mdms",
+                            splitrule="logrank",
+                            importance="random",
+                            B=1000,
+                            ci=90,
+                            parallel=FALSE,
+                            conf=NULL,
+                            verbose=TRUE,
+                            seed=seed)
+                            
+    #===================================================
+    # Synthetic dataset
     # Proportional Hazards Time-To-Event Regression Model 
     # saturated with first order terms only.
     #===================================================
     X.main.cph <- cph.main(X=X, 
-                           main.term=rownames(main.mdms))
+                           main.term=rownames(X.main.mdms))
 
     #===================================================
     # Real dataset
@@ -155,11 +173,29 @@ library("IRSF")
                  
     #===================================================
     # Real dataset
+    # Ranking of individual and noise variables by univariate 
+    # Minimal Depth of a Maximal Subtree (MDMS)
+    # Parallel mode
+    #===================================================
+    MACS.main.mdms <- rsf.main(X=X,
+                               ntree=1000, 
+                               method="mdms", 
+                               splitrule="logrank", 
+                               importance="random", 
+                               B=1000, 
+                               ci=80,
+                               parallel=TRUE, 
+                               conf=conf, 
+                               verbose=TRUE, 
+                               seed=seed)
+                               
+    #===================================================
+    # Real dataset
     # Proportional Hazards Time-To-Event Regression Model 
     # saturated with first order terms only.
     #===================================================
     MACS.main.cph <- cph.main(X=X, 
-                              main.term=rownames(main.mdms))
+                              main.term=rownames(MACS.main.mdms))
 
     }
 
