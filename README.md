@@ -4,13 +4,13 @@ Interaction Random Survival Forest (IRSF): an ensemble survival tree approach to
 
 ===============
 ### Description
-Builds ensemble survival tree models to reveal variable interactions when the response is a time-to-events outcome.
-The current version is a development release. It contains additional R codes in folder "/inst/doc" for the analysis 
-and generation of results shown in manuscript (Dazard et al., 2017). Codes contain randomization, interaction modeling, 
-and prediction subroutines to be used in addition to the following R packages: 
-[`survival`](https://CRAN.R-project.org/package=survival) for Kaplan-Meier and Cox regression modeling, 
-[`randomForestSRC`](https://CRAN.R-project.org/package=randomForestSRC) for RSF modeling (Ishwaran and Kogalur, 2013, 2007), and optionally 
-[`ggRandomForests`](https://CRAN.R-project.org/package=ggRandomForests) for Random Forest exploration/visualization (Ehrlinger, 2014). 
+Builds ensemble survival tree models to reveal variable interactions when the response is a time-to-events outcome. 
+Codes contain randomization, interaction modeling, and prediction subroutines to be used in addition to the following 
+R packages: [`survival`](https://CRAN.R-project.org/package=survival) for Kaplan-Meier and Cox regression modeling, 
+[`randomForestSRC`](https://CRAN.R-project.org/package=randomForestSRC) (Ishwaran and Kogalur, 2013, 2007) for RSF modeling, 
+and optionally [`ggRandomForests`](https://CRAN.R-project.org/package=ggRandomForests) (Ehrlinger, 2014) for Random Forest 
+exploration/visualization. The current version contains additional R codes in folder "/inst/doc" for the analysis and generation 
+of results shown in the corresponding article (Dazard et al., 2018).
 
 #### Abstract
 Unraveling interactions among variables such as genetic, clinical, demographic and environmental factors is essential to understand the development of common and complex diseases. To increase the power to detect such variables interactions associated with clinical time-to-events outcomes, we borrowed established concepts from Random Survival Forest (RSF) models. We introduce a novel RSF-based pairwise interaction estimator and derive a randomization method with bootstrap confidence intervals for inferring interaction significance. Using various linear and non-linear time-to-events survival models in simulation studies, we first show the efficiency of our approach: true pairwise interaction-effects between variables are thus uncovered, while they may not be accompanied with their corresponding main-effects and often not detected by standard semi-parametric Cox regression. Moreover, using a RSF-based cross-validation scheme for generating prediction estimators, we show that informative predictors may thus be inferred. We illustrate the application of our approach in an HIV cohort study recording key host gene polymorphisms and their association with HIV change of tropism or AIDS progression. Altogether, this shows how linear or non-linear pairwise statistical interactions between variables may be uncovered in clinical studies with time-to-event outcomes of interest when the motivation is to discover important variables interactions with a predictive clinical value.
