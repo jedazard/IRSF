@@ -9,13 +9,12 @@
 }
 
 \description{
-    Builds ensemble survival tree models to reveal variable interactions when the response is a time-to-events outcome.
-    The current version is a development release. It contains additional R codes in folder "/inst/doc" for the analysis 
-    and generation of results shown in manuscript (Dazard et al., 2017). Codes contain randomization, interaction modeling, 
-    and prediction subroutines to be used in addition to the following R packages: 
-    \pkg{survival} for Kaplan-Meier and Cox regression modeling, \pkg{randomForestSRC} for RSF modeling 
-    (Ishwaran and Kogalur, 2013, 2007), and optionally \pkg{ggRandomForests} (Ehrlinger, 2014) for Random Forest 
-    exploration/visualization. 
+    Builds ensemble survival tree models to reveal variable interactions when the response is a time-to-events outcome. 
+    Codes contain randomization, interaction modeling, and prediction subroutines to be used in addition to the following 
+    R packages: \pkg{survival} for Kaplan-Meier and Cox regression modeling, \pkg{randomForestSRC} (Ishwaran and Kogalur, 2013, 2007) 
+    for RSF modeling, and optionally \pkg{ggRandomForests} (Ehrlinger, 2014) for Random Forest exploration/visualization. 
+    The current version contains additional R codes in folder "/inst/doc" for the analysis and generation of results shown 
+    in the corresponding article (Dazard et al., 2018). 
 }
 
 \details{
