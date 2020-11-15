@@ -7,7 +7,7 @@
 \title{Real Dataset: MACS Cohort Study}
 
 \description{
-  Publicly available dataset from the Multicenter AIDS Cohort Study (MACS) available at (http://www.statepi.jhsph.edu/macs/macs.html).
+  Publicly available dataset from the Multicenter AIDS Cohort Study (MACS) available at (https://www.statepi.jhsph.edu/macs/macs.html).
   The dataset provides longitudinal account of viral tropism in relation to the HIV full spectrum of rates of HIV-1 disease progression (Shepherd, et al. 2008). 
   To our knowledge, this cohort provides a unique dataset with well characterized clinical information for analyzing associations between host genetic variation 
   and viral tropism as well as disease progression. Here, we determined whether copy number variation in beta-defensin and its interactions with certain polymorphisms 

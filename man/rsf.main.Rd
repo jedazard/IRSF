@@ -88,7 +88,8 @@
     but rather an OOB case is assigned a daughter node randomly whenever a split on \code{x} is encountered in the in-bag tree.
     If \code{"anti"} is used, then \code{x} is assigned to the opposite node whenever a split on \code{x} is encountered in the in-bag tree.
 
-    The function \code{rsf.main} relies on the R package \pkg{parallel} to create a parallel backend within an R session, enabling access to a clusterof compute cores and/or nodes on a local and/or remote machine(s) and scaling-up with the number of CPU cores available and efficient parallel
+    The function \code{rsf.main} relies on the R package \pkg{parallel} to create a parallel backend within an R session, enabling access to a 
+    clusterof compute cores and/or nodes on a local and/or remote machine(s) and scaling-up with the number of CPU cores available and efficient parallel
     execution. To run a procedure in parallel (with parallel RNG), argument \code{parallel} is to be set to \code{TRUE} and argument \code{conf}
     is to be specified (i.e. non \code{NULL}). Argument \code{conf} uses the options described in function \code{makeCluster} of the R packages
     \pkg{parallel} and \pkg{snow}. \pkg{IRSF} supports two types of communication mechanisms between master and worker processes:
