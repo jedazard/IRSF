@@ -7,7 +7,7 @@
 \title{Real Dataset: MACS Cohort Study}
 
 \description{
-  Publicly available dataset from the Multicenter AIDS Cohort Study (MACS) available at (https://www.statepi.jhsph.edu/macs/macs.html).
+  Publicly available dataset from the Multicenter AIDS Cohort Study (MACS) available at (https://statepi.jhsph.edu/macs/macs.html).
   The dataset provides longitudinal account of viral tropism in relation to the HIV full spectrum of rates of HIV-1 disease progression (Shepherd, et al. 2008). 
   To our knowledge, this cohort provides a unique dataset with well characterized clinical information for analyzing associations between host genetic variation 
   and viral tropism as well as disease progression. Here, we determined whether copy number variation in beta-defensin and its interactions with certain polymorphisms 
@@ -75,7 +75,7 @@
     This work made use of the High Performance Computing Resource in the Core Facility for Advanced Research Computing at Case Western Reserve University. 
     We are thankful to Ms. Janet Schollenberger, Senior Project Coordinator, CAMACS, as well as Dr. Jeremy J. Martinson, Sudhir Penugonda, Shehnaz K. Hussain, Jay H. Bream, 
     and Priya Duggal, for providing us the data related to the samples analyzed in the present study. Data in this manuscript were collected by the Multicenter AIDS Cohort Study (MACS) 
-    at (https://www.statepi.jhsph.edu/macs/macs.html) with centers at Baltimore, Chicago, Los Angeles, Pittsburgh, and the Data Coordinating Center: The Johns Hopkins University Bloomberg School of Public Health. 
+    at (https://statepi.jhsph.edu/macs/macs.html) with centers at Baltimore, Chicago, Los Angeles, Pittsburgh, and the Data Coordinating Center: The Johns Hopkins University Bloomberg School of Public Health. 
     The MACS is funded primarily by the National Institute of Allergy and Infectious Diseases (NIAID), with additional co-funding from the National Cancer Institute (NCI), 
     the National Heart, Lung, and Blood Institute (NHLBI), and the National Institute on Deafness and Communication Disorders (NIDCD). MACS data collection is also supported by Johns Hopkins University CTSA. 
     This study was supported by two grants from the National Institute of Health: NIDCR P01DE019759 (Aaron Weinberg, Peter Zimmerman, Richard J. Jurevic, Mark Chance) and NCI R01CA163739 (Hemant Ishwaran). 
