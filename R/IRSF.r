@@ -3,7 +3,7 @@
 # Usage         :
 #===============#
 #                    rsf.main(X,
-#                             ntree = 1000,
+#                             ntree = 500,
 #                             method = "mdms",
 #                             splitrule = "logrank",
 #                             importance = "random",
@@ -32,7 +32,7 @@
 #==========================================================================================#
 
 rsf.main <- function(X,
-                     ntree = 1000,
+                     ntree = 500,
                      method = "mdms",
                      splitrule = "logrank",
                      importance = "random",
@@ -137,7 +137,7 @@ rsf.main <- function(X,
 # Usage         :
 #===============#
 #                    rsf.int(X,
-#                            ntree = 1000,
+#                            ntree = 500,
 #                            method = "imdms",
 #                            splitrule = "logrank",
 #                            importance = "random",
@@ -166,7 +166,7 @@ rsf.main <- function(X,
 #==========================================================================================#
 
 rsf.int <- function(X,
-                    ntree = 1000,
+                    ntree = 500,
                     method = "imdms",
                     splitrule = "logrank",
                     importance = "random",
