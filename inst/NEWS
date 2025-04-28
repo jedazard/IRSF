@@ -33,3 +33,18 @@ PACKAGE INSTALLATION
 - Built and tested under R version 4.0.3 (2020-10-10).
 - Migrated update to GitHub and tested by Travis CI.
 ---------------------------------------------------------------------------------
+Date   : 2025-04-24
+o RELEASE 1.0.4
+SIGNIFICANT USER-VISIBLE CHANGES
+- New submission to CRAN after package was archived by CRAN on 2022-02-23 due to 
+  reverse dependency of "randomForestSRC", that was archived on the same day.
+- Reduced the default number of tree grown to 500 in the original grow call.
+USER EXPERIENCE IMPROVEMENT
+- Computational efficiency improvement by discarding un-necessary statistics 
+  of the original grow call.
+PACKAGE INSTALLATION
+- Minor updates in manual files (Rd files).
+- Minor updates in documentation files (DESCRIPTION, NEWS and README).
+- Built and tested under R version 4.4.3 (025-02-28).
+- Migrated update to GitHub and tested by Travis CI.
+---------------------------------------------------------------------------------
