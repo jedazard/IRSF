@@ -1,8 +1,8 @@
 Package: IRSF
 Type: Package
 Title: Interaction Random Survival Forest
-Version: 1.0.3
-Date: 2020-11-09
+Version: 1.0.4
+Date: 2025-04-24
 Authors@R: person("Jean-Eudes", "Dazard",
                    role = c("aut", "cre"),
                    email = "jean-eudes.dazard@case.edu")
@@ -15,5 +15,5 @@ NeedsCompilation: no
 URL: https://github.com/jedazard/IRSF
 Repository: CRAN, GitHub, Inc.
 Date/Publication: 2017-06-24
-License: GPL (>= 3) | file LICENSE
+License: GPL (>= 3)
 Archs: i386, x64
